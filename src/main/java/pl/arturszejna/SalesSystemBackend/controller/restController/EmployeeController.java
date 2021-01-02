@@ -11,7 +11,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/employees")
-public class employeeController {
+public class EmployeeController {
 
     private final EmployeeService employeeService;
 

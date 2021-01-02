@@ -3,9 +3,6 @@ package pl.arturszejna.SalesSystemBackend.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import pl.arturszejna.SalesSystemBackend.entity.Item;
 import pl.arturszejna.SalesSystemBackend.repository.ItemRepository;
 

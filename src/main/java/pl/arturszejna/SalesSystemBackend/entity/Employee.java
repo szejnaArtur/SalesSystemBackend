@@ -18,10 +18,7 @@ public class Employee {
     @Column
     private String lastName;
 
-    @Column
-    private String login;
-
-    @Column
-    private String password;
+    @OneToOne(mappedBy = "employee")
+    private EmployeeCredentials employeeCredentials;
 
 }
