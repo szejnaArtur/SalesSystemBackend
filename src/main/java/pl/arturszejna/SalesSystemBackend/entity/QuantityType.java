@@ -17,6 +17,6 @@ public class QuantityType {
     private String name;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "quantityType")
-    private List<Item> items;
+    private List<Product> products;
 
 }

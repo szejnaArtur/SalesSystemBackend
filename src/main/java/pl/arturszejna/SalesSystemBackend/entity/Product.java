@@ -6,11 +6,11 @@ import javax.persistence.*;
 
 @Entity
 @Data
-public class Item {
+public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idItem;
+    private Long idProduct;
 
     @Column
     private String name;
@@ -21,6 +21,7 @@ public class Item {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idQuantityType")
     private QuantityType quantityType;
+
 
 
 }

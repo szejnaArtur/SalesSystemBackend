@@ -3,31 +3,31 @@ package pl.arturszejna.SalesSystemBackend.controller.restController;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.arturszejna.SalesSystemBackend.entity.Item;
-import pl.arturszejna.SalesSystemBackend.service.ItemService;
+import pl.arturszejna.SalesSystemBackend.entity.Product;
+import pl.arturszejna.SalesSystemBackend.service.ProductService;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/items")
 @RequiredArgsConstructor
-public class ItemController {
+public class ProductController {
 
-    private ItemService itemService;
+    private ProductService productService;
 
     @PostMapping("/add")
-    public Item addItem(@RequestBody Item item){
-        return itemService.add(item);
+    public Product addItem(@RequestBody Product product){
+        return productService.add(product);
     }
 
     @GetMapping("/findAll")
-    public List<Item> findAllItem(){
-        return itemService.findAll();
+    public List<Product> findAllItem(){
+        return productService.findAll();
     }
 
     @DeleteMapping("/delete")
     public ResponseEntity deleteItem(@RequestBody Long idItem){
-        itemService.delete(idItem);
+        productService.delete(idItem);
         return ResponseEntity.ok().build();
     }
 }
