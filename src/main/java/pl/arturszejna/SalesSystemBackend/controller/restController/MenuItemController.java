@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.arturszejna.SalesSystemBackend.dto.MenuItemDto;
-import pl.arturszejna.SalesSystemBackend.entity.MenuItem;
 import pl.arturszejna.SalesSystemBackend.service.MenuItemService;
 
 import java.util.List;
@@ -17,18 +16,25 @@ public class MenuItemController {
     private final MenuItemService menuItemService;
 
     @PostMapping(value = "/add")
-    public MenuItem add(@RequestBody MenuItem newMenuItem){
-        return menuItemService.add(newMenuItem);
+    public MenuItemDto add(@RequestBody MenuItemDto newMenuItem) {
+        return menuItemService.saveOrUpdate(newMenuItem);
     }
 
     @GetMapping(value = "/findAll")
-    public List<MenuItemDto> findAll(){
+    public List<MenuItemDto> findAll() {
+
         return menuItemService.findAll();
     }
 
-    @DeleteMapping(value = "/delete")
-    public ResponseEntity delete(@RequestBody Long idMenuItem){
-        return menuItemService.delete(idMenuItem);
+    @GetMapping(value = "/find/{id}")
+    public MenuItemDto findById(@PathVariable Long id) {
+        return menuItemService.findById(id);
+    }
+
+    @DeleteMapping(value = "/delete/{id}")
+    public ResponseEntity delete(@PathVariable Long id) {
+
+        return menuItemService.delete(id);
     }
 
 }

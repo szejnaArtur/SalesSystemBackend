@@ -9,7 +9,7 @@ import javax.persistence.*;
 public class EmployeeCredentials {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idEmployeeCredentials;
 
     @Column
