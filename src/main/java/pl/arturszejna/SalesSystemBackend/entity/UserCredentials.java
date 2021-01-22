@@ -6,11 +6,11 @@ import javax.persistence.*;
 
 @Entity
 @Data
-public class EmployeeCredentials {
+public class UserCredentials {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idEmployeeCredentials;
+    private Long idUserCredentials;
 
     @Column
     private String login;
@@ -19,7 +19,7 @@ public class EmployeeCredentials {
     private String password;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name= "idEmployee")
-    private Employee employee;
+    @JoinColumn(name= "idUser")
+    private User user;
 
 }

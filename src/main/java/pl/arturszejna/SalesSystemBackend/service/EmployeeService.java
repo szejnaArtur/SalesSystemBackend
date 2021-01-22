@@ -14,18 +14,20 @@ public class EmployeeService {
 
     private final EmployeeRepository employeeRepository;
 
-    public Employee addEmployee(Employee newEmployee) {
-        return employeeRepository.save(newEmployee);
+    public Employee add(Employee employee){
+        return employeeRepository.save(employee);
     }
 
-    public List<Employee> findAllEmployees(){
+    public List<Employee> findAll(){
         return employeeRepository.findAll();
     }
 
-    public ResponseEntity deleteEmployee(Long idEmployee){
+    public ResponseEntity delete(Long idEmployee){
         employeeRepository.deleteById(idEmployee);
         return ResponseEntity.ok().build();
     }
 
-
+    public Employee findByPIN(String PIN){
+        return employeeRepository.findEmployeeByPIN(PIN);
+    }
 }

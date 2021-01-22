@@ -1,32 +1,32 @@
 package pl.arturszejna.SalesSystemBackend.controller.restController;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import pl.arturszejna.SalesSystemBackend.dto.EmployeeDTO;
 import pl.arturszejna.SalesSystemBackend.entity.Employee;
 import pl.arturszejna.SalesSystemBackend.service.EmployeeService;
 
-import java.util.List;
-
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/employees")
+@RequestMapping(value = "/employee")
 public class EmployeeController {
 
     private final EmployeeService employeeService;
 
-    @PostMapping("/add")
-    public Employee addEmployee(@RequestBody Employee employee) {
-        return employeeService.addEmployee(employee);
-    }
-
-    @GetMapping("/findAll")
-    public List<Employee> findAllEmployees(){
-        return employeeService.findAllEmployees();
-    }
-
-    @DeleteMapping("/delete")
-    ResponseEntity deleteEmployee(@RequestBody Long idEmployee){
-        return employeeService.deleteEmployee(idEmployee);
+    @GetMapping("/findByPIN/{PIN}")
+    public EmployeeDTO findByPIN(@PathVariable String PIN){
+        Employee employee = employeeService.findByPIN(PIN);
+        EmployeeDTO employeeDTO;
+        if(employee != null){
+            employeeDTO = EmployeeDTO.of(employee);
+            employeeDTO.setAuthenticated(true);
+        } else {
+            employeeDTO = new EmployeeDTO();
+            employeeDTO.setAuthenticated(false);
+        }
+        return employeeDTO;
     }
 }

@@ -5,4 +5,6 @@ import pl.arturszejna.SalesSystemBackend.entity.Employee;
 
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
+    Employee findEmployeeByPIN(String PIN);
+
 }

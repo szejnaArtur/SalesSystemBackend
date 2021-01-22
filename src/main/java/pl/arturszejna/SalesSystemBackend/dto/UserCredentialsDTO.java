@@ -3,7 +3,7 @@ package pl.arturszejna.SalesSystemBackend.dto;
 import lombok.Data;
 
 @Data
-public class EmployeeCredentialsDTO {
+public class UserCredentialsDTO {
 
     private String login;
     private String password;

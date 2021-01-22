@@ -6,11 +6,11 @@ import javax.persistence.*;
 
 @Entity
 @Data
-public class Employee {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idEmployee;
+    private Long idUser;
 
     @Column
     private String firstName;
@@ -18,7 +18,7 @@ public class Employee {
     @Column
     private String lastName;
 
-    @Column
-    private String PIN;
+    @OneToOne(mappedBy = "user")
+    private UserCredentials userCredentials;
 
 }
