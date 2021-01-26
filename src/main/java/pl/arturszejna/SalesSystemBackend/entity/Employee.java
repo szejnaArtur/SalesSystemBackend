@@ -3,6 +3,7 @@ package pl.arturszejna.SalesSystemBackend.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -20,5 +21,8 @@ public class Employee {
 
     @Column
     private String PIN;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
+    private List<WorkHours> workHours;
 
 }
