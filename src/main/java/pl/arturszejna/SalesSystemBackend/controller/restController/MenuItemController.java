@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.arturszejna.SalesSystemBackend.dto.MenuItemDto;
+import pl.arturszejna.SalesSystemBackend.entity.WorkHours;
 import pl.arturszejna.SalesSystemBackend.service.MenuItemService;
 
 import java.util.List;
