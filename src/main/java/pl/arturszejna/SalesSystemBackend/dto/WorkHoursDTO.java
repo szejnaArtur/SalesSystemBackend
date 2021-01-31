@@ -1,7 +1,6 @@
 package pl.arturszejna.SalesSystemBackend.dto;
 
 import lombok.Data;
-import pl.arturszejna.SalesSystemBackend.entity.Employee;
 import pl.arturszejna.SalesSystemBackend.entity.WorkHours;
 
 import java.time.LocalDateTime;

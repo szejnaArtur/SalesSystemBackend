@@ -10,4 +10,6 @@ public interface WorkHoursRepository extends JpaRepository<WorkHours, Long> {
 
     List<WorkHours> findAllByEmployee(Employee employee);
 
+    List<WorkHours> findAllByEndWorkIsNull();
+
 }

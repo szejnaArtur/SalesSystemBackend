@@ -26,7 +26,7 @@ public class WorkHoursController {
 
     @GetMapping(value = "/findFirst/{idEmployee}")
     public WorkHoursDTO findFirst(@PathVariable Long idEmployee) {
-        return workHoursService.findFirstByEmployee(idEmployee);
+        return workHoursService.findLastByEmployee(idEmployee);
     }
 
 }

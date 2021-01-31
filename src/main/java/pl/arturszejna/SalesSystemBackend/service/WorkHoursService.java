@@ -2,7 +2,6 @@ package pl.arturszejna.SalesSystemBackend.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 import pl.arturszejna.SalesSystemBackend.dto.WorkHoursDTO;
 import pl.arturszejna.SalesSystemBackend.entity.Employee;
 import pl.arturszejna.SalesSystemBackend.entity.WorkHours;
@@ -25,7 +24,7 @@ public class WorkHoursService {
         Optional<Employee> optionalEmployee = employeeRepository.findById(idEmployee);
         if (optionalEmployee.isPresent()) {
             Employee employee = optionalEmployee.get();
-            WorkHoursDTO dto = findFirstByEmployee(idEmployee);
+            WorkHoursDTO dto = findLastByEmployee(idEmployee);
             if (dto.getStartWork() == null) {
                 dto.setStartWork(LocalDateTime.now());
                 workHoursRepository.save(WorkHours.of(dto, employee));
@@ -49,17 +48,19 @@ public class WorkHoursService {
         return allWorkHours.stream().map(WorkHoursDTO::of).collect(Collectors.toList());
     }
 
-    public WorkHoursDTO findFirstByEmployee(Long idEmployee) {
+    public WorkHoursDTO findLastByEmployee(Long idEmployee) {
         Optional<Employee> optionalEmployee = employeeRepository.findById(idEmployee);
         if (optionalEmployee.isPresent()) {
             Employee employee = optionalEmployee.get();
             List<WorkHours> allWorkHours = workHoursRepository.findAllByEmployee(employee);
-            WorkHours workHours = allWorkHours.get(allWorkHours.size() - 1);
-            return WorkHoursDTO.of(workHours);
+            if(allWorkHours.size() != 0){
+                WorkHours workHours = allWorkHours.get(allWorkHours.size() - 1);
+                return WorkHoursDTO.of(workHours);
+            } else {
+                return new WorkHoursDTO();
+            }
         } else {
             throw new NullPointerException("Not found employee.");
         }
     }
-
-
 }
