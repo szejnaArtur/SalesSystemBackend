@@ -3,6 +3,7 @@ package pl.arturszejna.SalesSystemBackend.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -14,4 +15,8 @@ public class MenuItemType {
 
     @Column
     private String name;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "type")
+    private List<MenuItem> menuItems;
+
 }

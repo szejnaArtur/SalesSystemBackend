@@ -1,9 +1,10 @@
 package pl.arturszejna.SalesSystemBackend.entity;
 
 import lombok.Data;
-import pl.arturszejna.SalesSystemBackend.dto.MenuItemDto;
+import pl.arturszejna.SalesSystemBackend.dto.MenuItemDTO;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -25,24 +26,36 @@ public class MenuItem {
     @Column
     private String description;
 
-    @Column
-    private String type;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "idType")
+    private MenuItemType type;
 
-    public static MenuItem of(MenuItemDto newMenuItem) {
-        MenuItem dto = new MenuItem();
-        dto.setName(newMenuItem.getName());
-        dto.setPrice(newMenuItem.getPrice());
-        dto.setKcal(newMenuItem.getKcal());
-        dto.setDescription(newMenuItem.getDescription());
-        dto.setType(newMenuItem.getType());
-        return dto;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "menuItem")
+    private List<OrderItem> orderItems;
+
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "menuItem")
+//    private List<OrderItem> orderItems;
+
+
+
+    public static MenuItem of(MenuItemDTO dto, MenuItemType type) {
+        MenuItem menuItem = new MenuItem();
+        menuItem.setIdMenuItem(dto.getIdMenuItem());
+        menuItem.setName(dto.getName());
+        menuItem.setPrice(dto.getPrice());
+        menuItem.setKcal(dto.getKcal());
+        menuItem.setDescription(dto.getDescription());
+        menuItem.setType(type);
+        return menuItem;
     }
 
-    public void update(MenuItemDto dto) {
-        this.setName(dto.getName());
-        this.setPrice(dto.getPrice());
-        this.setKcal(dto.getKcal());
-        this.setDescription(dto.getDescription());
-        this.setType(dto.getType());
+    public void update(MenuItemDTO dto, MenuItemType type) {
+        setIdMenuItem(dto.getIdMenuItem());
+        setName(dto.getName());
+        setPrice(dto.getPrice());
+        setKcal(dto.getKcal());
+        setDescription(dto.getDescription());
+        setType(type);
+
     }
 }
