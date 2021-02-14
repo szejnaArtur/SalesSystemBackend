@@ -2,6 +2,7 @@ package pl.arturszejna.SalesSystemBackend.dto;
 
 import lombok.Data;
 import pl.arturszejna.SalesSystemBackend.entity.MenuItem;
+import pl.arturszejna.SalesSystemBackend.entity.MenuItemType;
 
 @Data
 public class MenuItemDTO {
@@ -11,7 +12,7 @@ public class MenuItemDTO {
     private Double price;
     private Integer kcal;
     private String description;
-    private String type;
+    private MenuItemTypeDTO type;
 
     public static MenuItemDTO of(MenuItem menuItem){
         MenuItemDTO dto = new MenuItemDTO();
@@ -20,7 +21,7 @@ public class MenuItemDTO {
         dto.setPrice(menuItem.getPrice());
         dto.setKcal(menuItem.getKcal());
         dto.setDescription(menuItem.getDescription());
-        dto.setType(menuItem.getType().getName());
+        dto.setType(MenuItemTypeDTO.of(menuItem.getType()));
         return dto;
     }
 }

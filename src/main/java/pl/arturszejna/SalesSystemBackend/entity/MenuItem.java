@@ -33,29 +33,24 @@ public class MenuItem {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "menuItem")
     private List<OrderItem> orderItems;
 
-//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "menuItem")
-//    private List<OrderItem> orderItems;
-
-
-
-    public static MenuItem of(MenuItemDTO dto, MenuItemType type) {
+    public static MenuItem of(MenuItemDTO dto) {
         MenuItem menuItem = new MenuItem();
         menuItem.setIdMenuItem(dto.getIdMenuItem());
         menuItem.setName(dto.getName());
         menuItem.setPrice(dto.getPrice());
         menuItem.setKcal(dto.getKcal());
         menuItem.setDescription(dto.getDescription());
-        menuItem.setType(type);
+        menuItem.setType(MenuItemType.of(dto.getType()));
         return menuItem;
     }
 
-    public void update(MenuItemDTO dto, MenuItemType type) {
+    public void update(MenuItemDTO dto) {
         setIdMenuItem(dto.getIdMenuItem());
         setName(dto.getName());
         setPrice(dto.getPrice());
         setKcal(dto.getKcal());
         setDescription(dto.getDescription());
-        setType(type);
+        setType(MenuItemType.of(dto.getType()));
 
     }
 }

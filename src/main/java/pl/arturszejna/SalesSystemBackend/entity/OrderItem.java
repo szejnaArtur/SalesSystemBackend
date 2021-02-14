@@ -17,14 +17,19 @@ public class OrderItem {
     private Integer quantity;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "idOrderBill")
+    private OrderBill orderBill;
+
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idMenuItem")
     private MenuItem menuItem;
 
-    public static OrderItem of(OrderItemDTO orderItemDTO, MenuItemType type){
+    public static OrderItem of(OrderItemDTO dto){
         OrderItem orderItem = new OrderItem();
-        orderItem.setIdOrderItem(orderItemDTO.getIdOrderItem());
-        orderItem.setQuantity(orderItemDTO.getQuantity());
-        orderItem.setMenuItem(MenuItem.of(orderItemDTO.getMenuItemDTO(), type));
+        orderItem.setIdOrderItem(dto.getIdOrderItem());
+        orderItem.setQuantity(dto.getQuantity());
+        orderItem.setMenuItem(MenuItem.of(dto.getMenuItemDTO()));
         return orderItem;
     }
 }
