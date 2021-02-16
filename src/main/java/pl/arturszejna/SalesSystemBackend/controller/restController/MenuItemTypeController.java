@@ -2,6 +2,7 @@ package pl.arturszejna.SalesSystemBackend.controller.restController;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.arturszejna.SalesSystemBackend.dto.MenuItemTypeDTO;
@@ -21,4 +22,8 @@ public class MenuItemTypeController {
         return menuItemTypeService.findAll();
     }
 
+    @GetMapping(value = "/findByName/{name}")
+    public MenuItemTypeDTO findByName(@PathVariable String name){
+        return MenuItemTypeDTO.of(menuItemTypeService.findByName(name));
+    }
 }

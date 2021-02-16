@@ -8,6 +8,7 @@ public class OrderItemDTO {
 
     private Long idOrderItem;
     private MenuItemDTO menuItemDTO;
+    private OrderBillDTO orderBillDTO;
     private Integer quantity;
 
     public static OrderItemDTO of(OrderItem orderItem){
@@ -15,6 +16,7 @@ public class OrderItemDTO {
         dto.setIdOrderItem(orderItem.getIdOrderItem());
         dto.setQuantity(orderItem.getQuantity());
         dto.setMenuItemDTO(MenuItemDTO.of(orderItem.getMenuItem()));
+        dto.setOrderBillDTO(OrderBillDTO.of(orderItem.getOrderBill()));
         return dto;
     }
 

@@ -30,6 +30,7 @@ public class OrderItem {
         orderItem.setIdOrderItem(dto.getIdOrderItem());
         orderItem.setQuantity(dto.getQuantity());
         orderItem.setMenuItem(MenuItem.of(dto.getMenuItemDTO()));
+        orderItem.setOrderBill(OrderBill.of(dto.getOrderBillDTO()));
         return orderItem;
     }
 }
