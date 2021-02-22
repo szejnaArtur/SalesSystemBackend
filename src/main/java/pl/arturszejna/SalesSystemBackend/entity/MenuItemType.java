@@ -20,4 +20,11 @@ public class MenuItemType {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "type")
     private List<MenuItem> menuItems;
 
+    public static MenuItemType of(MenuItemTypeDTO dto){
+        MenuItemType menuItemType = new MenuItemType();
+        menuItemType.setIdType(dto.getIdType());
+        menuItemType.setName(dto.getName());
+        return menuItemType;
+    }
+
 }
