@@ -1,9 +1,9 @@
 package pl.arturszejna.SalesSystemBackend.entity;
 
 import lombok.Data;
-import pl.arturszejna.SalesSystemBackend.dto.MenuItemDTO;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -28,6 +28,9 @@ public class MenuItem {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idType")
     private MenuItemType type;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "menuItem")
+    private List<OrderItem> orderItems;
 
 //    public static MenuItem of(MenuItemDTO dto, MenuItemType type) {
 //        MenuItem menuItem = new MenuItem();
