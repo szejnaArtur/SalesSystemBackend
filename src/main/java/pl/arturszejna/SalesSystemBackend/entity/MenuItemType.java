@@ -1,6 +1,7 @@
 package pl.arturszejna.SalesSystemBackend.entity;
 
 import lombok.Data;
+import pl.arturszejna.SalesSystemBackend.dto.MenuItemTypeDTO;
 
 import javax.persistence.*;
 import java.util.List;

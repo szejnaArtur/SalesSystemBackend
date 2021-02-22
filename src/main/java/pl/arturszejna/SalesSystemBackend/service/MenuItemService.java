@@ -1,11 +1,9 @@
 package pl.arturszejna.SalesSystemBackend.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import pl.arturszejna.SalesSystemBackend.dto.MenuItemDTO;
 import pl.arturszejna.SalesSystemBackend.entity.MenuItem;
-import pl.arturszejna.SalesSystemBackend.entity.MenuItemType;
 import pl.arturszejna.SalesSystemBackend.repository.MenuItemRepository;
 
 import java.util.List;
@@ -19,23 +17,23 @@ public class MenuItemService {
     private final MenuItemRepository menuItemRepository;
     private final MenuItemTypeService menuItemTypeService;
 
-    public MenuItemDTO saveOrUpdate(MenuItemDTO newMenuItem) {
-        if (newMenuItem.getIdMenuItem() == null) {
-            MenuItemType type = menuItemTypeService.findByName(newMenuItem.getType());
-            menuItemRepository.save(MenuItem.of(newMenuItem, type));
-            return newMenuItem;
-        } else {
-            Optional<MenuItem> optionalMenuItem = menuItemRepository.findById(newMenuItem.getIdMenuItem());
-            if (optionalMenuItem.isPresent()) {
-                MenuItem menuItem = optionalMenuItem.get();
-                MenuItemType type = menuItemTypeService.findByName(newMenuItem.getType());
-                menuItem.update(newMenuItem, type);
-                return MenuItemDTO.of(menuItemRepository.save(menuItem));
-            } else {
-                throw new RuntimeException("Can't find menu item with given id: " + newMenuItem.getIdMenuItem());
-            }
-        }
-    }
+//    public MenuItemDTO saveOrUpdate(MenuItemDTO newMenuItem) {
+//        if (newMenuItem.getIdMenuItem() == null) {
+//            MenuItemType type = menuItemTypeService.findByName(newMenuItem.getType().getName());
+//            menuItemRepository.save(MenuItem.of(newMenuItem, type));
+//            return newMenuItem;
+//        } else {
+//            Optional<MenuItem> optionalMenuItem = menuItemRepository.findById(newMenuItem.getIdMenuItem());
+//            if (optionalMenuItem.isPresent()) {
+//                MenuItem menuItem = optionalMenuItem.get();
+//                MenuItemType type = menuItemTypeService.findByName(newMenuItem.getType().getName());
+//                menuItem.update(newMenuItem, type);
+//                return MenuItemDTO.of(menuItemRepository.save(menuItem));
+//            } else {
+//                throw new RuntimeException("Can't find menu item with given id: " + newMenuItem.getIdMenuItem());
+//            }
+//        }
+//    }
 
     public List<MenuItemDTO> findAll() {
         return menuItemRepository.findAll()
@@ -48,9 +46,9 @@ public class MenuItemService {
         Optional<MenuItem> optionalDto = menuItemRepository.findById(idMenuItem);
         return optionalDto.map(MenuItemDTO::of).orElse(null);
     }
-
-    public ResponseEntity delete(Long idMenuItem) {
-        menuItemRepository.deleteById(idMenuItem);
-        return ResponseEntity.ok().build();
-    }
+//
+//    public ResponseEntity delete(Long idMenuItem) {
+//        menuItemRepository.deleteById(idMenuItem);
+//        return ResponseEntity.ok().build();
+//    }
 }
