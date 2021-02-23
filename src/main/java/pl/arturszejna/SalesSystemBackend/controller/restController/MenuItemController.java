@@ -17,11 +17,6 @@ public class MenuItemController {
 
     private final MenuItemService menuItemService;
 
-    //    @PostMapping(value = "/add")
-//    public MenuItemDTO add(@RequestBody MenuItemDTO newMenuItem) {
-//        return menuItemService.saveOrUpdate(newMenuItem);
-//    }
-//
     @GetMapping(value = "/findAll")
     public List<MenuItemDTO> findAll() {
         return menuItemService.findAll();
@@ -31,11 +26,5 @@ public class MenuItemController {
     public MenuItemDTO findById(@PathVariable Long id) {
         return menuItemService.findById(id);
     }
-
-//    @DeleteMapping(value = "/delete/{id}")
-//    public ResponseEntity delete(@PathVariable Long id) {
-//
-//        return menuItemService.delete(id);
-//    }
 
 }

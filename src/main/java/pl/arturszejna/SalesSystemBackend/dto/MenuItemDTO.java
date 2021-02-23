@@ -2,7 +2,6 @@ package pl.arturszejna.SalesSystemBackend.dto;
 
 import lombok.Data;
 import pl.arturszejna.SalesSystemBackend.entity.MenuItem;
-import pl.arturszejna.SalesSystemBackend.entity.MenuItemType;
 
 @Data
 public class MenuItemDTO {

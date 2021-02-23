@@ -19,4 +19,8 @@ public class OrderItemService {
         return OrderItemDTO.of(all);
     }
 
+    public List<OrderItemDTO> findByIdBill(Long idBill){
+         return OrderItemDTO.of(orderItemRepository.findAllByBill_IdBill(idBill));
+    }
+
 }

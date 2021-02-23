@@ -2,6 +2,7 @@ package pl.arturszejna.SalesSystemBackend.controller.restController;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.arturszejna.SalesSystemBackend.dto.OrderItemDTO;
@@ -19,6 +20,11 @@ public class OrderItemController {
     @GetMapping("/findAll")
     public List<OrderItemDTO> findAll(){
         return orderItemService.findAll();
+    }
+
+    @GetMapping("/findOrderItem/{id}")
+    public List<OrderItemDTO> findByIdBill(@PathVariable Long id){
+        return orderItemService.findByIdBill(id);
     }
 
 }

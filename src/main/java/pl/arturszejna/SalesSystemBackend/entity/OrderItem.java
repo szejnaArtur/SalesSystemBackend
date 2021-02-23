@@ -19,4 +19,8 @@ public class OrderItem {
     @JoinColumn(name = "idMenuItem")
     private MenuItem menuItem;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "idBill")
+    private Bill bill;
+
 }

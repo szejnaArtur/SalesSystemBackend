@@ -12,17 +12,20 @@ public class OrderItemDTO {
     private Long idOrderItem;
     private Integer amount;
     private MenuItemDTO menuItemDTO;
+    private BillDTO billDTO;
 
-    private OrderItemDTO(Long idOrderItem, Integer amount, MenuItemDTO menuItemDTO) {
+    private OrderItemDTO(Long idOrderItem, Integer amount, MenuItemDTO menuItemDTO, BillDTO billDTO) {
         this.idOrderItem = idOrderItem;
         this.amount = amount;
         this.menuItemDTO = menuItemDTO;
+        this.billDTO = billDTO;
     }
 
     public static OrderItemDTO of(OrderItem orderItem) {
         return new OrderItemDTO(orderItem.getIdOrderItem(),
                 orderItem.getAmount(),
-                MenuItemDTO.of(orderItem.getMenuItem()));
+                MenuItemDTO.of(orderItem.getMenuItem()),
+                BillDTO.of(orderItem.getBill()));
     }
 
     public static List<OrderItemDTO> of(List<OrderItem> orderItemList) {
