@@ -5,6 +5,4 @@ import pl.arturszejna.SalesSystemBackend.entity.Bill;
 
 public interface BillRepository extends JpaRepository<Bill, Long> {
 
-
-
 }

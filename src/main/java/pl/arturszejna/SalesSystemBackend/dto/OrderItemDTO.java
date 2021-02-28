@@ -21,6 +21,8 @@ public class OrderItemDTO {
         this.billDTO = billDTO;
     }
 
+    public OrderItemDTO() {}
+
     public static OrderItemDTO of(OrderItem orderItem) {
         return new OrderItemDTO(orderItem.getIdOrderItem(),
                 orderItem.getAmount(),

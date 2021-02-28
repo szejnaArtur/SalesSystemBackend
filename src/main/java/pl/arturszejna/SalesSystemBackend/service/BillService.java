@@ -24,4 +24,9 @@ public class BillService {
         return optionalBill.map(BillDTO::of).orElse(null);
     }
 
+    public BillDTO save(BillDTO billDTO){
+        System.out.println(billDTO.getOrderDate().getHour() + " " + billDTO.getOrderDate().getMinute());
+        return BillDTO.of(billRepository.save(Bill.of(billDTO)));
+    }
+
 }

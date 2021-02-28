@@ -1,6 +1,7 @@
 package pl.arturszejna.SalesSystemBackend.entity;
 
 import lombok.Data;
+import pl.arturszejna.SalesSystemBackend.dto.BillDTO;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -22,4 +23,17 @@ public class Bill {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "bill")
     private List<OrderItem> orderItems;
+
+    private Bill(Long idBill, LocalDateTime orderDate, LocalDateTime pickUpDate){
+        this.idBill = idBill;
+        this.orderDate = orderDate;
+        this.pickUpDate = pickUpDate;
+    }
+
+    public Bill() {}
+
+    public static Bill of(BillDTO dto){
+        return new Bill(dto.getIdBill(), dto.getOrderDate(), dto.getPickUpDate());
+    }
+
 }
