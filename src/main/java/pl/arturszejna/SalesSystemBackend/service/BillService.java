@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.arturszejna.SalesSystemBackend.dto.BillDTO;
 import pl.arturszejna.SalesSystemBackend.entity.Bill;
+import pl.arturszejna.SalesSystemBackend.entity.Employee;
 import pl.arturszejna.SalesSystemBackend.repository.BillRepository;
 
 import java.util.List;
@@ -14,6 +15,8 @@ import java.util.Optional;
 public class BillService {
 
     public final BillRepository billRepository;
+    public final EmployeeService employeeService;
+
 
     public List<BillDTO> findAll(){
         return BillDTO.of(billRepository.findAll());
@@ -25,8 +28,11 @@ public class BillService {
     }
 
     public BillDTO save(BillDTO billDTO){
-        System.out.println(billDTO.getOrderDate().getHour() + " " + billDTO.getOrderDate().getMinute());
-        return BillDTO.of(billRepository.save(Bill.of(billDTO)));
+        Bill bill = billRepository.save(Bill.of(billDTO));
+        Employee employee = employeeService.findById(billDTO.getEmployeeDTO().getIdEmployee());
+        bill.setEmployee(employee);
+        billRepository.save(bill);
+        return billDTO;
     }
 
 }

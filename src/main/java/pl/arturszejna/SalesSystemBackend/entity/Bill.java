@@ -24,6 +24,10 @@ public class Bill {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "bill")
     private List<OrderItem> orderItems;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "idEmployee")
+    private Employee employee;
+
     private Bill(Long idBill, LocalDateTime orderDate, LocalDateTime pickUpDate){
         this.idBill = idBill;
         this.orderDate = orderDate;

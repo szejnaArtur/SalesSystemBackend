@@ -17,6 +17,7 @@ import java.util.List;
 public class OrderItemService {
 
     private final OrderItemRepository orderItemRepository;
+    private final BillService billService;
     private final BillRepository billRepository;
 
     public List<OrderItemDTO> findAll() {
@@ -30,8 +31,7 @@ public class OrderItemService {
 
     public void saveAll(List<OrderItemDTO> orderItemsDTO) {
         List<OrderItem> orderItemList = new ArrayList<>();
-        Bill bill = Bill.of(orderItemsDTO.get(0).getBillDTO());
-        billRepository.save(bill);
+        billService.save(orderItemsDTO.get(0).getBillDTO());
         List<Bill> bills = billRepository.findAll();
         Bill newBill = bills.get(bills.size() - 1);
         for (OrderItemDTO orderItemDTO : orderItemsDTO){

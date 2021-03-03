@@ -13,6 +13,7 @@ public class BillDTO {
     private Long idBill;
     private LocalDateTime orderDate;
     private LocalDateTime pickUpDate;
+    private EmployeeDTO employeeDTO;
 
     private BillDTO(Long idBill, LocalDateTime orderDate, LocalDateTime pickUpDate){
         this.idBill = idBill;

@@ -10,6 +10,7 @@ import pl.arturszejna.SalesSystemBackend.repository.WorkHoursRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -38,5 +39,10 @@ public class EmployeeService {
             employeesDTO.add(EmployeeDTO.of(workHours.getEmployee()));
         }
         return employeesDTO;
+    }
+
+    public Employee findById(Long id){
+        Optional<Employee> optionalEmployee = employeeRepository.findById(id);
+        return optionalEmployee.orElse(null);
     }
 }

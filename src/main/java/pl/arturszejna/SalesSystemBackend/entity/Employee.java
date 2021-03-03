@@ -25,4 +25,7 @@ public class Employee {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
     private List<WorkHours> workHours;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
+    private List<Bill> bills;
+
 }
