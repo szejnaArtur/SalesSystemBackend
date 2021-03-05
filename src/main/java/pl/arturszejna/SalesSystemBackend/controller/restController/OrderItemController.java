@@ -33,4 +33,9 @@ public class OrderItemController {
         orderItemService.saveAll(orderItemDTOList);
         return orderItemDTOList;
     }
+
+    @GetMapping("/findAllByDate")
+    public List<OrderItemDTO> findAllByTodayDate(){
+        return OrderItemDTO.of(orderItemService.findAllByTodayDate());
+    }
 }

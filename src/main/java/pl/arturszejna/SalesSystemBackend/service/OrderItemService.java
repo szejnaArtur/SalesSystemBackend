@@ -9,8 +9,10 @@ import pl.arturszejna.SalesSystemBackend.entity.OrderItem;
 import pl.arturszejna.SalesSystemBackend.repository.BillRepository;
 import pl.arturszejna.SalesSystemBackend.repository.OrderItemRepository;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -25,8 +27,8 @@ public class OrderItemService {
         return OrderItemDTO.of(all);
     }
 
-    public List<OrderItemDTO> findByIdBill(Long idBill){
-         return OrderItemDTO.of(orderItemRepository.findAllByBill_IdBill(idBill));
+    public List<OrderItemDTO> findByIdBill(Long idBill) {
+        return OrderItemDTO.of(orderItemRepository.findAllByBill_IdBill(idBill));
     }
 
     public void saveAll(List<OrderItemDTO> orderItemsDTO) {
@@ -34,7 +36,7 @@ public class OrderItemService {
         billService.save(orderItemsDTO.get(0).getBillDTO());
         List<Bill> bills = billRepository.findAll();
         Bill newBill = bills.get(bills.size() - 1);
-        for (OrderItemDTO orderItemDTO : orderItemsDTO){
+        for (OrderItemDTO orderItemDTO : orderItemsDTO) {
             OrderItem orderItem = createOrderItems(orderItemDTO);
             orderItem.setBill(newBill);
             orderItemList.add(orderItem);
@@ -42,7 +44,7 @@ public class OrderItemService {
         orderItemRepository.saveAll(orderItemList);
     }
 
-    public OrderItem createOrderItems(OrderItemDTO orderItemDTO){
+    public OrderItem createOrderItems(OrderItemDTO orderItemDTO) {
         OrderItem orderItem = new OrderItem();
         MenuItem menuItem = MenuItem.of(orderItemDTO.getMenuItemDTO());
         Bill bill = Bill.of(orderItemDTO.getBillDTO());
@@ -52,6 +54,19 @@ public class OrderItemService {
         orderItem.setMenuItem(menuItem);
 
         return orderItem;
+    }
+
+    public List<OrderItem> findAllByTodayDate() {
+        LocalDateTime now = LocalDateTime.now();
+        int year = now.getYear();
+        int month = now.getMonth().getValue();
+        int dayOfMonth = now.getDayOfMonth();
+        return orderItemRepository.findAll()
+                .stream()
+                .filter(x -> dayOfMonth == x.getBill().getOrderDate().getDayOfMonth())
+                .filter(x -> month == x.getBill().getOrderDate().getMonth().getValue())
+                .filter(x -> year == x.getBill().getOrderDate().getYear())
+                .collect(Collectors.toList());
     }
 
 }
