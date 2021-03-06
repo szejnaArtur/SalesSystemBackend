@@ -2,8 +2,11 @@ package pl.arturszejna.SalesSystemBackend.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import pl.arturszejna.SalesSystemBackend.dto.AverageBillAmountDTO;
+import pl.arturszejna.SalesSystemBackend.dto.EmployeeDTO;
 import pl.arturszejna.SalesSystemBackend.dto.OrderItemDTO;
 import pl.arturszejna.SalesSystemBackend.entity.Bill;
+import pl.arturszejna.SalesSystemBackend.entity.Employee;
 import pl.arturszejna.SalesSystemBackend.entity.MenuItem;
 import pl.arturszejna.SalesSystemBackend.entity.OrderItem;
 import pl.arturszejna.SalesSystemBackend.repository.BillRepository;
@@ -56,7 +59,7 @@ public class OrderItemService {
         return orderItem;
     }
 
-    public List<OrderItem> findAllByTodayDate() {
+    private List<OrderItem> findAllByTodayDate() {
         LocalDateTime now = LocalDateTime.now();
         int year = now.getYear();
         int month = now.getMonth().getValue();
@@ -67,6 +70,36 @@ public class OrderItemService {
                 .filter(x -> month == x.getBill().getOrderDate().getMonth().getValue())
                 .filter(x -> year == x.getBill().getOrderDate().getYear())
                 .collect(Collectors.toList());
+    }
+
+    //TODO This method can be done better. To improve
+    public List<AverageBillAmountDTO> createAGCRaport() {
+        List<OrderItem> orderItems = findAllByTodayDate();
+        List<AverageBillAmountDTO> averageBillAmountDTOS = new ArrayList<>();
+        boolean employeeFound = false;
+        for (OrderItem orderItem : orderItems) {
+            Employee employee = orderItem.getBill().getEmployee();
+            double amount = orderItem.getAmount() * orderItem.getMenuItem().getPrice();
+
+            if (averageBillAmountDTOS.size() == 0) {
+                averageBillAmountDTOS.add(new AverageBillAmountDTO(EmployeeDTO.of(employee), amount));
+            } else {
+                for (AverageBillAmountDTO averageBillAmountDTO : averageBillAmountDTOS) {
+                    if (averageBillAmountDTO.getEmployeeDTO().getIdEmployee().equals(employee.getIdEmployee())) {
+                        averageBillAmountDTO.setNumberOfTransactions(averageBillAmountDTO.getNumberOfTransactions() + 1);
+                        averageBillAmountDTO.setAmount(averageBillAmountDTO.getAmount() + amount);
+                        employeeFound = true;
+                        break;
+                    }
+                }
+                if (!employeeFound){
+                    averageBillAmountDTOS.add(new AverageBillAmountDTO(EmployeeDTO.of(employee), amount));
+                }
+                employeeFound = false;
+            }
+        }
+        System.out.println(averageBillAmountDTOS.toString());
+        return averageBillAmountDTOS;
     }
 
 }
