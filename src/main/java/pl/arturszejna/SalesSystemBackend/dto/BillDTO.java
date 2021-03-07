@@ -15,14 +15,15 @@ public class BillDTO {
     private LocalDateTime pickUpDate;
     private EmployeeDTO employeeDTO;
 
-    private BillDTO(Long idBill, LocalDateTime orderDate, LocalDateTime pickUpDate){
+    private BillDTO(Long idBill, LocalDateTime orderDate, LocalDateTime pickUpDate, EmployeeDTO employeeDTO){
         this.idBill = idBill;
         this.orderDate = orderDate;
         this.pickUpDate = pickUpDate;
+        this.employeeDTO = employeeDTO;
     }
 
     public static BillDTO of(Bill bill){
-        return new BillDTO(bill.getIdBill(), bill.getOrderDate(), bill.getPickUpDate());
+        return new BillDTO(bill.getIdBill(), bill.getOrderDate(), bill.getPickUpDate(), EmployeeDTO.of(bill.getEmployee()));
     }
 
     public static List<BillDTO> of(List<Bill> billList){

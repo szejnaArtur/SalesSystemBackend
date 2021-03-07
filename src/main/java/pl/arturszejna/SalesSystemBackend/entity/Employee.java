@@ -1,6 +1,7 @@
 package pl.arturszejna.SalesSystemBackend.entity;
 
 import lombok.Data;
+import pl.arturszejna.SalesSystemBackend.dto.EmployeeDTO;
 
 import javax.persistence.*;
 import java.util.List;
@@ -27,5 +28,18 @@ public class Employee {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
     private List<Bill> bills;
+
+    public Employee(){}
+
+    private Employee(Long idEmployee, String firstName, String lastName, String PIN){
+        this.idEmployee = idEmployee;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.PIN = PIN;
+    }
+
+    public static Employee of(EmployeeDTO dto){
+        return new Employee(dto.getIdEmployee(), dto.getFirstName(), dto.getLastName(), dto.getPIN());
+    }
 
 }

@@ -2,7 +2,6 @@ package pl.arturszejna.SalesSystemBackend.controller.restController;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import pl.arturszejna.SalesSystemBackend.dto.AverageBillAmountDTO;
 import pl.arturszejna.SalesSystemBackend.dto.OrderItemDTO;
 import pl.arturszejna.SalesSystemBackend.repository.BillRepository;
 import pl.arturszejna.SalesSystemBackend.repository.OrderItemRepository;
@@ -33,10 +32,5 @@ public class OrderItemController {
     public List<OrderItemDTO> saveAll(@RequestBody List<OrderItemDTO> orderItemDTOList) {
         orderItemService.saveAll(orderItemDTOList);
         return orderItemDTOList;
-    }
-
-    @GetMapping("/showAGC")
-    public List<AverageBillAmountDTO> showAVGRaport(){
-        return orderItemService.createAGCRaport();
     }
 }
