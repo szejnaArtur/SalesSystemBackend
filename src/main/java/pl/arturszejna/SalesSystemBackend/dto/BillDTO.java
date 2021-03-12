@@ -14,16 +14,18 @@ public class BillDTO {
     private LocalDateTime orderDate;
     private LocalDateTime pickUpDate;
     private EmployeeDTO employeeDTO;
+    private String paymentMethod;
 
-    private BillDTO(Long idBill, LocalDateTime orderDate, LocalDateTime pickUpDate, EmployeeDTO employeeDTO){
+    private BillDTO(Long idBill, LocalDateTime orderDate, LocalDateTime pickUpDate, EmployeeDTO employeeDTO, String paymentMethod){
         this.idBill = idBill;
         this.orderDate = orderDate;
         this.pickUpDate = pickUpDate;
         this.employeeDTO = employeeDTO;
+        this.paymentMethod = paymentMethod;
     }
 
     public static BillDTO of(Bill bill){
-        return new BillDTO(bill.getIdBill(), bill.getOrderDate(), bill.getPickUpDate(), EmployeeDTO.of(bill.getEmployee()));
+        return new BillDTO(bill.getIdBill(), bill.getOrderDate(), bill.getPickUpDate(), EmployeeDTO.of(bill.getEmployee()), bill.getPaymentMethod());
     }
 
     public static List<BillDTO> of(List<Bill> billList){

@@ -28,17 +28,21 @@ public class Bill {
     @JoinColumn(name = "idEmployee")
     private Employee employee;
 
-    private Bill(Long idBill, LocalDateTime orderDate, LocalDateTime pickUpDate, Employee employee){
+    @Column
+    private String paymentMethod;
+
+    private Bill(Long idBill, LocalDateTime orderDate, LocalDateTime pickUpDate, Employee employee, String paymentMethod){
         this.idBill = idBill;
         this.orderDate = orderDate;
         this.pickUpDate = pickUpDate;
         this.employee = employee;
+        this.paymentMethod = paymentMethod;
     }
 
     public Bill() {}
 
     public static Bill of(BillDTO dto){
-        return new Bill(dto.getIdBill(), dto.getOrderDate(), dto.getPickUpDate(), Employee.of(dto.getEmployeeDTO()));
+        return new Bill(dto.getIdBill(), dto.getOrderDate(), dto.getPickUpDate(), Employee.of(dto.getEmployeeDTO()), dto.getPaymentMethod());
     }
 
 }
