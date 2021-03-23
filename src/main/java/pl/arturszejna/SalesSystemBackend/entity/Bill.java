@@ -21,6 +21,9 @@ public class Bill {
     @Column
     private LocalDateTime pickUpDate;
 
+    @Column
+    private Long texID;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "bill")
     private List<OrderItem> orderItems;
 
@@ -31,18 +34,19 @@ public class Bill {
     @Column
     private String paymentMethod;
 
-    private Bill(Long idBill, LocalDateTime orderDate, LocalDateTime pickUpDate, Employee employee, String paymentMethod){
+    private Bill(Long idBill, LocalDateTime orderDate, LocalDateTime pickUpDate, Employee employee, String paymentMethod, Long texID){
         this.idBill = idBill;
         this.orderDate = orderDate;
         this.pickUpDate = pickUpDate;
         this.employee = employee;
         this.paymentMethod = paymentMethod;
+        this.texID = texID;
     }
 
     public Bill() {}
 
     public static Bill of(BillDTO dto){
-        return new Bill(dto.getIdBill(), dto.getOrderDate(), dto.getPickUpDate(), Employee.of(dto.getEmployeeDTO()), dto.getPaymentMethod());
+        return new Bill(dto.getIdBill(), dto.getOrderDate(), dto.getPickUpDate(), Employee.of(dto.getEmployeeDTO()), dto.getPaymentMethod(), dto.getTexID());
     }
 
 }

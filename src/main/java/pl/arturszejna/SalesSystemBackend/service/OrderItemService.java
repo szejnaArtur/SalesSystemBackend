@@ -2,21 +2,15 @@ package pl.arturszejna.SalesSystemBackend.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.arturszejna.SalesSystemBackend.dto.AverageBillAmountDTO;
-import pl.arturszejna.SalesSystemBackend.dto.EmployeeDTO;
 import pl.arturszejna.SalesSystemBackend.dto.OrderItemDTO;
 import pl.arturszejna.SalesSystemBackend.entity.Bill;
-import pl.arturszejna.SalesSystemBackend.entity.Employee;
 import pl.arturszejna.SalesSystemBackend.entity.MenuItem;
 import pl.arturszejna.SalesSystemBackend.entity.OrderItem;
 import pl.arturszejna.SalesSystemBackend.repository.BillRepository;
 import pl.arturszejna.SalesSystemBackend.repository.OrderItemRepository;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -56,6 +50,7 @@ public class OrderItemService {
 
         orderItem.setAmount(amount);
         orderItem.setMenuItem(menuItem);
+        orderItem.setDiscount(orderItemDTO.getDiscount());
 
         return orderItem;
     }

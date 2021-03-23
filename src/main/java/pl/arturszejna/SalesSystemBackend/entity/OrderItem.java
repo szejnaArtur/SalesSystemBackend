@@ -26,11 +26,15 @@ public class OrderItem {
     @JoinColumn(name = "idBill")
     private Bill bill;
 
-    private OrderItem(Long idOrderItem, Integer amount, MenuItem menuItem, Bill bill) {
+    @Column
+    private Double discount;
+
+    private OrderItem(Long idOrderItem, Integer amount, MenuItem menuItem, Bill bill, Double discount) {
         this.idOrderItem = idOrderItem;
         this.amount = amount;
         this.menuItem = menuItem;
         this.bill = bill;
+        this.discount = discount;
     }
 
     public OrderItem() {
@@ -40,7 +44,8 @@ public class OrderItem {
         return new OrderItem(dto.getIdOrderItem(),
                 dto.getAmount(),
                 MenuItem.of(dto.getMenuItemDTO()),
-                Bill.of(dto.getBillDTO()));
+                Bill.of(dto.getBillDTO()),
+                dto.getDiscount());
     }
 
     public static List<OrderItem> of(List<OrderItemDTO> orderItemDTOList) {
