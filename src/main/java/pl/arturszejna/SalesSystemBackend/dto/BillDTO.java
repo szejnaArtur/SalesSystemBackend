@@ -15,19 +15,28 @@ public class BillDTO {
     private LocalDateTime pickUpDate;
     private EmployeeDTO employeeDTO;
     private Long texID;
-    private String paymentMethod;
+    private Double cashPaymentAmount;
+    private Double cardPaymentAmount;
+    private Double payUPaymentAmount;
+    private Double sodexoPaymentAmount;
 
-    private BillDTO(Long idBill, LocalDateTime orderDate, LocalDateTime pickUpDate, EmployeeDTO employeeDTO, String paymentMethod, Long texID){
+    private BillDTO(Long idBill, LocalDateTime orderDate, LocalDateTime pickUpDate, EmployeeDTO employeeDTO, Long texID,
+                    Double cashPaymentAmount, Double cardPaymentAmount, Double payUPaymentAmount, Double sodexoPaymentAmount){
         this.idBill = idBill;
         this.orderDate = orderDate;
         this.pickUpDate = pickUpDate;
         this.employeeDTO = employeeDTO;
-        this.paymentMethod = paymentMethod;
         this.texID = texID;
+        this.cashPaymentAmount = cashPaymentAmount;
+        this.cardPaymentAmount = cardPaymentAmount;
+        this.payUPaymentAmount = payUPaymentAmount;
+        this.sodexoPaymentAmount = sodexoPaymentAmount;
     }
 
     public static BillDTO of(Bill bill){
-        return new BillDTO(bill.getIdBill(), bill.getOrderDate(), bill.getPickUpDate(), EmployeeDTO.of(bill.getEmployee()), bill.getPaymentMethod(), bill.getTexID());
+        return new BillDTO(bill.getIdBill(), bill.getOrderDate(), bill.getPickUpDate(), EmployeeDTO.of(bill.getEmployee()),
+                bill.getTexID(), bill.getCashPaymentAmount(), bill.getCardPaymentAmount(), bill.getPayUPaymentAmount(),
+                bill.getSodexoPaymentAmount());
     }
 
     public static List<BillDTO> of(List<Bill> billList){

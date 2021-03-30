@@ -34,6 +34,9 @@ public class MenuItem {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "menuItem")
     private List<OrderItem> orderItems;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "menuItem")
+    private List<Addon> addons;
+
     private MenuItem(Long idMenuItem, String name, Double price, Integer kcal, String description, MenuItemType type) {
         this.idMenuItem = idMenuItem;
         this.name = name;

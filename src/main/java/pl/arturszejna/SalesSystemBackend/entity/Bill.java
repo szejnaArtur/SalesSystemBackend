@@ -32,21 +32,36 @@ public class Bill {
     private Employee employee;
 
     @Column
-    private String paymentMethod;
+    private Double cashPaymentAmount;
 
-    private Bill(Long idBill, LocalDateTime orderDate, LocalDateTime pickUpDate, Employee employee, String paymentMethod, Long texID){
+    @Column
+    private Double cardPaymentAmount;
+
+    @Column
+    private Double payUPaymentAmount;
+
+    @Column
+    private Double sodexoPaymentAmount;
+
+    private Bill(Long idBill, LocalDateTime orderDate, LocalDateTime pickUpDate, Employee employee, Long texID,
+                 Double cashPaymentAmount, Double cardPaymentAmount, Double payUPaymentAmount, Double sodexoPaymentAmount){
         this.idBill = idBill;
         this.orderDate = orderDate;
         this.pickUpDate = pickUpDate;
         this.employee = employee;
-        this.paymentMethod = paymentMethod;
         this.texID = texID;
+        this.cashPaymentAmount = cashPaymentAmount;
+        this.cardPaymentAmount = cardPaymentAmount;
+        this.payUPaymentAmount = payUPaymentAmount;
+        this.sodexoPaymentAmount = sodexoPaymentAmount;
     }
 
     public Bill() {}
 
     public static Bill of(BillDTO dto){
-        return new Bill(dto.getIdBill(), dto.getOrderDate(), dto.getPickUpDate(), Employee.of(dto.getEmployeeDTO()), dto.getPaymentMethod(), dto.getTexID());
+        return new Bill(dto.getIdBill(), dto.getOrderDate(), dto.getPickUpDate(), Employee.of(dto.getEmployeeDTO()),
+                dto.getTexID(), dto.getCashPaymentAmount(), dto.getCardPaymentAmount(), dto.getPayUPaymentAmount(),
+                dto.getSodexoPaymentAmount());
     }
 
 }

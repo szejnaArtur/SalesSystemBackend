@@ -55,7 +55,7 @@ public class BillService {
             double amount = 0;
 
             for (OrderItemDTO orderItem : check.getOrderItemDTOList()){
-                amount = amount + (orderItem.getAmount() * orderItem.getMenuItemDTO().getPrice());
+                amount = amount + (orderItem.getAmount() * orderItem.getMenuItemDTO().getPrice() - orderItem.getDiscount());
             }
 
             if (averageBillAmountDTOS.size() == 0) {
