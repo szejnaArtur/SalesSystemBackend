@@ -2,7 +2,6 @@ package pl.arturszejna.SalesSystemBackend.dto;
 
 import lombok.Data;
 import pl.arturszejna.SalesSystemBackend.entity.Addon;
-import pl.arturszejna.SalesSystemBackend.entity.MenuItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,16 +11,16 @@ public class AddonDTO {
 
     private Long idAddon;
     private Double price;
-    private MenuItem menuItem;
+    private String name;
 
-    private AddonDTO(Long idAddon, Double price, MenuItem menuItem) {
+    private AddonDTO(Long idAddon, Double price, String name) {
         this.idAddon = idAddon;
         this.price = price;
-        this.menuItem = menuItem;
+        this.name = name;
     }
 
     private static AddonDTO of(Addon addon) {
-        return new AddonDTO(addon.getIdAddon(), addon.getPrice(), addon.getMenuItem());
+        return new AddonDTO(addon.getIdAddon(), addon.getPrice(), addon.getName());
     }
 
     public static List<AddonDTO> of(List<Addon> addons) {

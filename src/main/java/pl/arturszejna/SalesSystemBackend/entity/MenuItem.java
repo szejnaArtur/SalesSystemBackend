@@ -34,16 +34,22 @@ public class MenuItem {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "menuItem")
     private List<OrderItem> orderItems;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "menuItem")
-    private List<Addon> addons;
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(
+            name = "MenuItem_Addon",
+            joinColumns = {@JoinColumn(name = "idMenuItem")},
+            inverseJoinColumns = {@JoinColumn(name = "idAddon")}
+    )
+    List<Addon> addons;
 
-    private MenuItem(Long idMenuItem, String name, Double price, Integer kcal, String description, MenuItemType type) {
+    private MenuItem(Long idMenuItem, String name, Double price, Integer kcal, String description, MenuItemType type, List<Addon> addons) {
         this.idMenuItem = idMenuItem;
         this.name = name;
         this.price = price;
         this.kcal = kcal;
         this.description = description;
         this.type = type;
+        this.addons = addons;
     }
 
     public MenuItem() {
@@ -55,7 +61,8 @@ public class MenuItem {
                 dto.getPrice(),
                 dto.getKcal(),
                 dto.getDescription(),
-                MenuItemType.of(dto.getType()));
+                MenuItemType.of(dto.getType()),
+                Addon.of(dto.getAddons()));
     }
 
     public static List<MenuItem> of(List<MenuItemDTO> dtoList) {

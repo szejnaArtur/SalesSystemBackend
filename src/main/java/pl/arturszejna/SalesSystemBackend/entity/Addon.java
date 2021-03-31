@@ -18,27 +18,30 @@ public class Addon {
     @Column
     private Double price;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "idMenuItem")
-    private MenuItem menuItem;
+    @Column
+    private String name;
 
-    private Addon(Long idAddon, Double price, MenuItem menuItem){
+    @ManyToMany(mappedBy = "addons")
+    private List<MenuItem> menuItems;
+
+    private Addon(Long idAddon, Double price, String name, List<MenuItem> menuItems) {
         this.idAddon = idAddon;
         this.price = price;
-        this.menuItem = menuItem;
+        this.name = name;
+        this.menuItems = menuItems;
     }
 
     public Addon() {
 
     }
 
-    public static Addon of(AddonDTO dto){
-        return new Addon(dto.getIdAddon(), dto.getPrice(), dto.getMenuItem());
+    public static Addon of(AddonDTO dto) {
+        return new Addon(dto.getIdAddon(), dto.getPrice(), dto.getName(), null);
     }
 
-    public static List<Addon> of(List<AddonDTO> addonsDTO){
+    public static List<Addon> of(List<AddonDTO> addonsDTO) {
         List<Addon> dtoList = new ArrayList<>();
-        for(AddonDTO dto : addonsDTO){
+        for (AddonDTO dto : addonsDTO) {
             dtoList.add(Addon.of(dto));
         }
         return dtoList;

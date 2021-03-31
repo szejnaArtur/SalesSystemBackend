@@ -1,7 +1,10 @@
 package pl.arturszejna.SalesSystemBackend.dto;
 
 import lombok.Data;
+import pl.arturszejna.SalesSystemBackend.entity.Addon;
 import pl.arturszejna.SalesSystemBackend.entity.MenuItem;
+
+import java.util.List;
 
 @Data
 public class MenuItemDTO {
@@ -12,6 +15,7 @@ public class MenuItemDTO {
     private Integer kcal;
     private String description;
     private MenuItemTypeDTO type;
+    private List<AddonDTO> addons;
 
     public static MenuItemDTO of(MenuItem menuItem){
         MenuItemDTO dto = new MenuItemDTO();
@@ -21,6 +25,7 @@ public class MenuItemDTO {
         dto.setKcal(menuItem.getKcal());
         dto.setDescription(menuItem.getDescription());
         dto.setType(MenuItemTypeDTO.of(menuItem.getType()));
+        dto.setAddons(AddonDTO.of(menuItem.getAddons()));
         return dto;
     }
 }
