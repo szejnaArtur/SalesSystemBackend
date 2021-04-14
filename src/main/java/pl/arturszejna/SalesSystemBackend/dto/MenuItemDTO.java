@@ -1,7 +1,6 @@
 package pl.arturszejna.SalesSystemBackend.dto;
 
 import lombok.Data;
-import pl.arturszejna.SalesSystemBackend.entity.Addon;
 import pl.arturszejna.SalesSystemBackend.entity.MenuItem;
 
 import java.util.List;
@@ -17,7 +16,7 @@ public class MenuItemDTO {
     private MenuItemTypeDTO type;
     private List<AddonDTO> addons;
 
-    public static MenuItemDTO of(MenuItem menuItem){
+    public static MenuItemDTO of(MenuItem menuItem) {
         MenuItemDTO dto = new MenuItemDTO();
         dto.setIdMenuItem(menuItem.getIdMenuItem());
         dto.setName(menuItem.getName());

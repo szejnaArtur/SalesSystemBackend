@@ -29,12 +29,17 @@ public class OrderItem {
     @Column
     private Double discount;
 
-    private OrderItem(Long idOrderItem, Integer amount, MenuItem menuItem, Bill bill, Double discount) {
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "orderItem")
+    private List<OrderAddon> orderAddonList;
+
+    private OrderItem(Long idOrderItem, Integer amount, MenuItem menuItem, Bill bill, Double discount,
+                      List<OrderAddon> orderAddonList) {
         this.idOrderItem = idOrderItem;
         this.amount = amount;
         this.menuItem = menuItem;
         this.bill = bill;
         this.discount = discount;
+        this.orderAddonList = orderAddonList;
     }
 
     public OrderItem() {
@@ -45,7 +50,8 @@ public class OrderItem {
                 dto.getAmount(),
                 MenuItem.of(dto.getMenuItemDTO()),
                 Bill.of(dto.getBillDTO()),
-                dto.getDiscount());
+                dto.getDiscount(),
+                OrderAddon.of(dto.getOrderAddonDTOList()));
     }
 
     public static List<OrderItem> of(List<OrderItemDTO> orderItemDTOList) {

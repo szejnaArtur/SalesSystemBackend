@@ -14,13 +14,16 @@ public class OrderItemDTO {
     private MenuItemDTO menuItemDTO;
     private BillDTO billDTO;
     private Double discount;
+    private List<OrderAddonDTO> orderAddonDTOList;
 
-    private OrderItemDTO(Long idOrderItem, Integer amount, MenuItemDTO menuItemDTO, BillDTO billDTO, Double discount) {
+    private OrderItemDTO(Long idOrderItem, Integer amount, MenuItemDTO menuItemDTO, BillDTO billDTO, Double discount,
+                         List<OrderAddonDTO> orderAddonDTOList) {
         this.idOrderItem = idOrderItem;
         this.amount = amount;
         this.menuItemDTO = menuItemDTO;
         this.billDTO = billDTO;
         this.discount = discount;
+        this.orderAddonDTOList = orderAddonDTOList;
     }
 
     public OrderItemDTO() {}
@@ -30,7 +33,8 @@ public class OrderItemDTO {
                 orderItem.getAmount(),
                 MenuItemDTO.of(orderItem.getMenuItem()),
                 BillDTO.of(orderItem.getBill()),
-                orderItem.getDiscount());
+                orderItem.getDiscount(),
+                OrderAddonDTO.of(orderItem.getOrderAddonList()));
     }
 
     public static List<OrderItemDTO> of(List<OrderItem> orderItemList) {
