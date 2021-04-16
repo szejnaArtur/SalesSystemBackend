@@ -19,7 +19,7 @@ public class AddonDTO {
         this.name = name;
     }
 
-    private static AddonDTO of(Addon addon) {
+    public static AddonDTO of(Addon addon) {
         return new AddonDTO(addon.getIdAddon(), addon.getPrice(), addon.getName());
     }
 

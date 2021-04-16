@@ -27,4 +27,9 @@ public class MenuItemController {
         return menuItemService.findById(id);
     }
 
+    @GetMapping(value = "/findByName/{name}")
+    public MenuItemDTO findByName(@PathVariable String name) {
+        return menuItemService.findByName(name);
+    }
+
 }

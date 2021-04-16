@@ -43,8 +43,13 @@ public class MenuItemService {
     }
 
     public MenuItemDTO findById(Long idMenuItem) {
-        Optional<MenuItem> optionalDto = menuItemRepository.findById(idMenuItem);
-        return optionalDto.map(MenuItemDTO::of).orElse(null);
+        Optional<MenuItem> optionalMenuItem = menuItemRepository.findById(idMenuItem);
+        return optionalMenuItem.map(MenuItemDTO::of).orElse(null);
+    }
+
+    public MenuItemDTO findByName(String name) {
+        Optional<MenuItem> optional = menuItemRepository.findByName(name);
+        return optional.map(MenuItemDTO::of).orElse(null);
     }
 //
 //    public ResponseEntity delete(Long idMenuItem) {
