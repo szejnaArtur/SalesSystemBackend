@@ -13,6 +13,7 @@ public class OrderItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable=false)
     private Long idOrderItem;
 
     @Column
@@ -28,6 +29,9 @@ public class OrderItem {
 
     @Column
     private Double discount;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "orderItem")
+    private List<OrderAddon> orderAddonList;
 
     private OrderItem(Long idOrderItem, Integer amount, MenuItem menuItem, Bill bill, Double discount) {
         this.idOrderItem = idOrderItem;

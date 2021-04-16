@@ -14,6 +14,7 @@ public class OrderItemDTO {
     private MenuItemDTO menuItemDTO;
     private BillDTO billDTO;
     private Double discount;
+    private List<OrderAddonDTO> orderAddonDTOList;
 
     private OrderItemDTO(Long idOrderItem, Integer amount, MenuItemDTO menuItemDTO, BillDTO billDTO, Double discount) {
         this.idOrderItem = idOrderItem;

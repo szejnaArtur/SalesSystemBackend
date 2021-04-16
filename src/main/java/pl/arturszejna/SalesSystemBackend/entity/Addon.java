@@ -24,6 +24,9 @@ public class Addon {
     @ManyToMany(mappedBy = "addons")
     private List<MenuItem> menuItems;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "addon")
+    private List<OrderAddon> orderAddonList;
+
     private Addon(Long idAddon, Double price, String name, List<MenuItem> menuItems) {
         this.idAddon = idAddon;
         this.price = price;

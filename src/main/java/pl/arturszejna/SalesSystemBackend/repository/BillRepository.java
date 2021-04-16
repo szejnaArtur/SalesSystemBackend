@@ -11,7 +11,6 @@ import java.util.List;
 public interface BillRepository extends JpaRepository<Bill, Long> {
 
     @Query("select b from Bill b where b.orderDate >= :dateTime")
-    List<Bill> findAllWithDateTimeAfter(
-            @Param("dateTime") LocalDateTime creationDateTime);
+    List<Bill> findAllWithDateTimeAfter(@Param("dateTime") LocalDateTime creationDateTime);
 
 }

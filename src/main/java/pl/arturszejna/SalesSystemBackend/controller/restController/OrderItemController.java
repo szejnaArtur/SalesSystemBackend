@@ -3,6 +3,7 @@ package pl.arturszejna.SalesSystemBackend.controller.restController;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import pl.arturszejna.SalesSystemBackend.dto.OrderItemDTO;
+import pl.arturszejna.SalesSystemBackend.entity.OrderItem;
 import pl.arturszejna.SalesSystemBackend.repository.BillRepository;
 import pl.arturszejna.SalesSystemBackend.repository.OrderItemRepository;
 import pl.arturszejna.SalesSystemBackend.service.OrderItemService;

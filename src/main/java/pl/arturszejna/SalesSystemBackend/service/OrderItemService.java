@@ -29,7 +29,12 @@ public class OrderItemService {
         return OrderItemDTO.of(orderItemRepository.findAllByBill_IdBill(idBill));
     }
 
+    public OrderItem findLastRecord() {
+        return orderItemRepository.findLastRecord();
+    }
+
     public void saveAll(List<OrderItemDTO> orderItemsDTO) {
+        System.out.println(orderItemsDTO.toString());
         List<OrderItem> orderItemList = new ArrayList<>();
         billService.save(orderItemsDTO.get(0).getBillDTO());
         List<Bill> bills = billRepository.findAll();
