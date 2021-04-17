@@ -10,7 +10,7 @@ public interface OrderItemRepository extends JpaRepository<OrderItem, Long> {
 
     List<OrderItem> findAllByBill_IdBill(Long id);
 
-    @Query(value = "select * from order_item order by id_order_item desc limit 1", nativeQuery = true)
-    OrderItem findLastRecord();
+    @Query(value = "select * from order_item order by id_order_item desc limit 10", nativeQuery = true)
+    List<OrderItem> findLastRecords();
 
 }

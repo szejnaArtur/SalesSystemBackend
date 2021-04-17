@@ -29,8 +29,8 @@ public class OrderItemService {
         return OrderItemDTO.of(orderItemRepository.findAllByBill_IdBill(idBill));
     }
 
-    public OrderItem findLastRecord() {
-        return orderItemRepository.findLastRecord();
+    public List<OrderItem> findLastRecord() {
+        return orderItemRepository.findLastRecords();
     }
 
     public void saveAll(List<OrderItemDTO> orderItemsDTO) {
