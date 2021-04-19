@@ -39,9 +39,9 @@ public class BillDTO {
                 bill.getSodexoPaymentAmount());
     }
 
-    public static List<BillDTO> of(List<Bill> billList){
+    public static List<BillDTO> of(List<Bill> billList) {
         List<BillDTO> dtoList = new ArrayList<>();
-        for(Bill bill : billList){
+        for (Bill bill : billList) {
             dtoList.add(BillDTO.of(bill));
         }
         return dtoList;

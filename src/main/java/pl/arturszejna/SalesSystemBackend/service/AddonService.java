@@ -21,7 +21,7 @@ public class AddonService {
     public final AddonRepository addonRepository;
 
 
-    public List<AddonDTO> findAll(){
+    public List<AddonDTO> findAll() {
         return AddonDTO.of(addonRepository.findAll());
     }
 

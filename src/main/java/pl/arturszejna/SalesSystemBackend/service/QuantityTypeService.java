@@ -17,15 +17,15 @@ public class QuantityTypeService {
 
     private final QuantityTypeRepository quantityTypeRepository;
 
-    public QuantityType add(QuantityType quantityType){
+    public QuantityType add(QuantityType quantityType) {
         return quantityTypeRepository.save(quantityType);
     }
 
-    public List<QuantityType> findAll(){
+    public List<QuantityType> findAll() {
         return quantityTypeRepository.findAll();
     }
 
-    public ResponseEntity delete(Long idQuantityType){
+    public ResponseEntity delete(Long idQuantityType) {
         quantityTypeRepository.deleteById(idQuantityType);
         return ResponseEntity.ok().build();
     }

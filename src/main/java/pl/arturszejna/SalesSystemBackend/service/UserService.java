@@ -18,11 +18,11 @@ public class UserService {
         return userRepository.save(newUser);
     }
 
-    public List<User> findAll(){
+    public List<User> findAll() {
         return userRepository.findAll();
     }
 
-    public ResponseEntity delete(Long idUser){
+    public ResponseEntity delete(Long idUser) {
         userRepository.deleteById(idUser);
         return ResponseEntity.ok().build();
     }

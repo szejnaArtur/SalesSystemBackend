@@ -18,7 +18,7 @@ public class OrderAddonController {
     private final OrderAddonService orderAddonService;
 
     @PostMapping("/addAll")
-    public List<OrderAddonDTO> saveAll(@RequestBody List<OrderAddonDTO> orderAddonDTOList){
+    public List<OrderAddonDTO> saveAll(@RequestBody List<OrderAddonDTO> orderAddonDTOList) {
         orderAddonService.saveAll(orderAddonDTOList);
         return orderAddonDTOList;
     }

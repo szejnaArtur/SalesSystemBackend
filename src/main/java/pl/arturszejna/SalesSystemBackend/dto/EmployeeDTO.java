@@ -12,7 +12,7 @@ public class EmployeeDTO {
     private String PIN;
     private boolean authenticated;
 
-    public static EmployeeDTO of(Employee employee){
+    public static EmployeeDTO of(Employee employee) {
         EmployeeDTO dto = new EmployeeDTO();
         dto.setIdEmployee(employee.getIdEmployee());
         dto.setFirstName(employee.getFirstName());

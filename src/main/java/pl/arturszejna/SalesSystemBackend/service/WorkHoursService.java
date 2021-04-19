@@ -53,7 +53,7 @@ public class WorkHoursService {
         if (optionalEmployee.isPresent()) {
             Employee employee = optionalEmployee.get();
             List<WorkHours> allWorkHours = workHoursRepository.findAllByEmployee(employee);
-            if(allWorkHours.size() != 0){
+            if (allWorkHours.size() != 0) {
                 WorkHours workHours = allWorkHours.get(allWorkHours.size() - 1);
                 return WorkHoursDTO.of(workHours);
             } else {

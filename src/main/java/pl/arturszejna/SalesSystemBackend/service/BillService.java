@@ -21,16 +21,16 @@ public class BillService {
     public final EmployeeService employeeService;
 
 
-    public List<BillDTO> findAll(){
+    public List<BillDTO> findAll() {
         return BillDTO.of(billRepository.findAll());
     }
 
-    public BillDTO findById(Long id){
+    public BillDTO findById(Long id) {
         Optional<Bill> optionalBill = billRepository.findById(id);
         return optionalBill.map(BillDTO::of).orElse(null);
     }
 
-    public BillDTO save(BillDTO billDTO){
+    public BillDTO save(BillDTO billDTO) {
         Bill bill = billRepository.save(Bill.of(billDTO));
         Employee employee = employeeService.findById(billDTO.getEmployeeDTO().getIdEmployee());
         bill.setEmployee(employee);
@@ -38,11 +38,11 @@ public class BillService {
         return billDTO;
     }
 
-    private List<CheckDTO> findAllWithDateTimeAfter(LocalDateTime localDateTime){
+    private List<CheckDTO> findAllWithDateTimeAfter(LocalDateTime localDateTime) {
         return CheckDTO.of(billRepository.findAllWithDateTimeAfter(localDateTime));
     }
 
-    public List<AverageBillAmountDTO> createAGCRaport(){
+    public List<AverageBillAmountDTO> createAGCRaport() {
         LocalDate now = LocalDate.now();
         LocalDateTime localDateTime = LocalDateTime.of(now.getYear(), now.getMonth().getValue(), now.getDayOfMonth(), 0, 0);
 
@@ -50,11 +50,11 @@ public class BillService {
         List<AverageBillAmountDTO> averageBillAmountDTOS = new ArrayList<>();
         boolean employeeFound = false;
 
-        for (CheckDTO check : allWithDateTimeAfter){
+        for (CheckDTO check : allWithDateTimeAfter) {
             EmployeeDTO employee = check.getEmployeeDTO();
             double amount = 0;
 
-            for (OrderItemDTO orderItem : check.getOrderItemDTOList()){
+            for (OrderItemDTO orderItem : check.getOrderItemDTOList()) {
                 amount = amount + (orderItem.getAmount() * orderItem.getMenuItemDTO().getPrice() - orderItem.getDiscount());
             }
 
@@ -69,7 +69,7 @@ public class BillService {
                         break;
                     }
                 }
-                if (!employeeFound){
+                if (!employeeFound) {
                     averageBillAmountDTOS.add(new AverageBillAmountDTO(employee, amount));
                 }
                 employeeFound = false;

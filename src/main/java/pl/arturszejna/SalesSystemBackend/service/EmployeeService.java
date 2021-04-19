@@ -41,7 +41,7 @@ public class EmployeeService {
         return employeesDTO;
     }
 
-    public Employee findById(Long id){
+    public Employee findById(Long id) {
         Optional<Employee> optionalEmployee = employeeRepository.findById(id);
         return optionalEmployee.orElse(null);
     }

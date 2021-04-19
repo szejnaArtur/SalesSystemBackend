@@ -19,14 +19,13 @@ public class OrderAddonService {
     public void saveAll(List<OrderAddonDTO> orderAddonDTOList) {
         List<OrderAddon> orderAddonList = OrderAddon.of(orderAddonDTOList);
         List<OrderItem> lastRecords = orderItemService.findLastRecord();
-        for (OrderAddon orderAddon : orderAddonList){
-            for (OrderItem orderItem : lastRecords){
-                if (orderAddon.getOrderItem().getMenuItem().getName().equals(orderItem.getMenuItem().getName())){
+        for (OrderAddon orderAddon : orderAddonList) {
+            for (OrderItem orderItem : lastRecords) {
+                if (orderAddon.getOrderItem().getMenuItem().getName().equals(orderItem.getMenuItem().getName())) {
                     orderAddon.setOrderItem(orderItem);
                     break;
                 }
             }
-//            orderAddon.setOrderItem(lastRecord);
         }
         orderAddonRepository.saveAll(orderAddonList);
     }

@@ -17,28 +17,28 @@ public class UserCredentialsService {
 
     private final UserCredentialsRepository userCredentialsRepository;
 
-    public UserCredentials add(UserCredentials userCredentials){
+    public UserCredentials add(UserCredentials userCredentials) {
         return userCredentialsRepository.save(userCredentials);
     }
 
-    public List<UserCredentials> findAll(){
+    public List<UserCredentials> findAll() {
         return userCredentialsRepository.findAll();
     }
 
-    public ResponseEntity delete(Long idUserCredentials){
+    public ResponseEntity delete(Long idUserCredentials) {
         userCredentialsRepository.deleteById(idUserCredentials);
         return ResponseEntity.ok().build();
     }
 
-    public UserAuthenticationResultDTO verifyUserCedentials(UserCredentialsDTO userCredentialsDTO){
+    public UserAuthenticationResultDTO verifyUserCedentials(UserCredentialsDTO userCredentialsDTO) {
         Optional<UserCredentials> optionalUserCredentials =
                 userCredentialsRepository.findByLogin(userCredentialsDTO.getLogin());
-        if(!optionalUserCredentials.isPresent()){
+        if (!optionalUserCredentials.isPresent()) {
             System.out.println("nie znaleziono takiego loginu.");
             return UserAuthenticationResultDTO.createUnauthnticated();
         } else {
             UserCredentials userCredentials = optionalUserCredentials.get();
-            if (!userCredentials.getPassword().equals(userCredentialsDTO.getPassword())){
+            if (!userCredentials.getPassword().equals(userCredentialsDTO.getPassword())) {
                 System.out.println("hasło jest nieprawidłowe");
                 return UserAuthenticationResultDTO.createUnauthnticated();
             } else {

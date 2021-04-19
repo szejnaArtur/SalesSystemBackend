@@ -33,7 +33,7 @@ public class UserCredentialsController {
     }
 
     @PostMapping("/veryfy_user_credensials")
-    public UserAuthenticationResultDTO verifyUserCedentials(@RequestBody UserCredentialsDTO userCredentialsDTO){
+    public UserAuthenticationResultDTO verifyUserCedentials(@RequestBody UserCredentialsDTO userCredentialsDTO) {
         return userCredentialsService.verifyUserCedentials(userCredentialsDTO);
     }
 }

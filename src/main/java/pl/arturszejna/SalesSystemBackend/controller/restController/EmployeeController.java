@@ -18,9 +18,8 @@ public class EmployeeController {
     private final EmployeeService employeeService;
 
     @GetMapping("/findByPIN/{PIN}")
-    public EmployeeDTO findByPIN(@PathVariable String PIN){
+    public EmployeeDTO findByPIN(@PathVariable String PIN) {
         return employeeService.findByPIN(PIN);
-
     }
 
     @GetMapping("/findAllAtWork")

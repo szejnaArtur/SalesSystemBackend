@@ -14,15 +14,15 @@ public class ProductService {
 
     private final ProductRepository productRepository;
 
-    public Product add(Product newProduct){
+    public Product add(Product newProduct) {
         return productRepository.save(newProduct);
     }
 
-    public List<Product> findAll(){
+    public List<Product> findAll() {
         return productRepository.findAll();
     }
 
-    public ResponseEntity delete(Long idItem){
+    public ResponseEntity delete(Long idItem) {
         productRepository.deleteById(idItem);
         return ResponseEntity.ok().build();
     }

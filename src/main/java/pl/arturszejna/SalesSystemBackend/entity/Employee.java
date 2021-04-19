@@ -29,16 +29,17 @@ public class Employee {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
     private List<Bill> bills;
 
-    public Employee(){}
+    public Employee() {
+    }
 
-    private Employee(Long idEmployee, String firstName, String lastName, String PIN){
+    private Employee(Long idEmployee, String firstName, String lastName, String PIN) {
         this.idEmployee = idEmployee;
         this.firstName = firstName;
         this.lastName = lastName;
         this.PIN = PIN;
     }
 
-    public static Employee of(EmployeeDTO dto){
+    public static Employee of(EmployeeDTO dto) {
         return new Employee(dto.getIdEmployee(), dto.getFirstName(), dto.getLastName(), dto.getPIN());
     }
 

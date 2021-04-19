@@ -19,7 +19,7 @@ public class UserCredentials {
     private String password;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name= "idUser")
+    @JoinColumn(name = "idUser")
     private User user;
 
 }

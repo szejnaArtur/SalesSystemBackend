@@ -27,7 +27,8 @@ public class OrderItemDTO {
         this.orderAddonDTOList = orderAddonDTOList;
     }
 
-    public OrderItemDTO() {}
+    public OrderItemDTO() {
+    }
 
     public static OrderItemDTO of(OrderItem orderItem) {
         return new OrderItemDTO(orderItem.getIdOrderItem(),

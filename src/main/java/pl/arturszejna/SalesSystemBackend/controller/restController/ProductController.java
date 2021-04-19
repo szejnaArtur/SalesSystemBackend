@@ -16,17 +16,17 @@ public class ProductController {
     private ProductService productService;
 
     @PostMapping("/add")
-    public Product addItem(@RequestBody Product product){
+    public Product addItem(@RequestBody Product product) {
         return productService.add(product);
     }
 
     @GetMapping("/findAll")
-    public List<Product> findAllItem(){
+    public List<Product> findAllItem() {
         return productService.findAll();
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity deleteItem(@RequestBody Long idItem){
+    public ResponseEntity deleteItem(@RequestBody Long idItem) {
         productService.delete(idItem);
         return ResponseEntity.ok().build();
     }

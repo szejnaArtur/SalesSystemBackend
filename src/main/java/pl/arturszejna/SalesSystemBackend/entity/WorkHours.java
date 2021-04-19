@@ -24,7 +24,7 @@ public class WorkHours {
     @JoinColumn(name = "idEmployee")
     private Employee employee;
 
-    public static WorkHours of(WorkHoursDTO dto, Employee employee){
+    public static WorkHours of(WorkHoursDTO dto, Employee employee) {
         WorkHours workHours = new WorkHours();
         workHours.setIdWorkHours(dto.getIdWorkHours());
         workHours.setStartWork(dto.getStartWork());

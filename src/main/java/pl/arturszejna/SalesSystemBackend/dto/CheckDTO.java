@@ -16,7 +16,7 @@ public class CheckDTO {
     private EmployeeDTO employeeDTO;
     private List<OrderItemDTO> orderItemDTOList;
 
-    public static CheckDTO of(Bill bill){
+    public static CheckDTO of(Bill bill) {
         CheckDTO dto = new CheckDTO();
         dto.setIdCheck(bill.getIdBill());
         dto.setOrderDate(bill.getOrderDate());
@@ -26,7 +26,7 @@ public class CheckDTO {
         return dto;
     }
 
-    public static List<CheckDTO> of(List<Bill> bills){
+    public static List<CheckDTO> of(List<Bill> bills) {
         List<CheckDTO> dtoList = new ArrayList<>();
         for (Bill bill : bills) {
             dtoList.add(CheckDTO.of(bill));

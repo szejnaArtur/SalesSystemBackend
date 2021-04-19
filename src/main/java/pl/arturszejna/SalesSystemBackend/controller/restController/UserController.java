@@ -21,12 +21,12 @@ public class UserController {
     }
 
     @GetMapping("/findAll")
-    public List<User> findAll(){
+    public List<User> findAll() {
         return userService.findAll();
     }
 
     @DeleteMapping("/delete")
-    ResponseEntity deleteEmployee(@RequestBody Long idUser){
+    ResponseEntity deleteEmployee(@RequestBody Long idUser) {
         return userService.delete(idUser);
     }
 }

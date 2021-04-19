@@ -11,13 +11,13 @@ public class UserAuthenticationResultDTO {
     private String lastName;
     private boolean authenticated;
 
-    public static UserAuthenticationResultDTO createUnauthnticated(){
+    public static UserAuthenticationResultDTO createUnauthnticated() {
         UserAuthenticationResultDTO dto = new UserAuthenticationResultDTO();
         dto.setAuthenticated(false);
         return dto;
     }
 
-    public static UserAuthenticationResultDTO of(UserCredentials userCredentials){
+    public static UserAuthenticationResultDTO of(UserCredentials userCredentials) {
         UserAuthenticationResultDTO dto = new UserAuthenticationResultDTO();
         dto.setFirstName(userCredentials.getUser().getFirstName());
         dto.setLastName(userCredentials.getUser().getLastName());

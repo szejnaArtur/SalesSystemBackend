@@ -23,5 +23,4 @@ public class Product {
     private QuantityType quantityType;
 
 
-
 }

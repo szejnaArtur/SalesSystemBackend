@@ -12,7 +12,7 @@ public class WorkHoursDTO {
     private LocalDateTime startWork;
     private LocalDateTime endWork;
 
-    public static WorkHoursDTO of(WorkHours workHours){
+    public static WorkHoursDTO of(WorkHours workHours) {
         WorkHoursDTO dto = new WorkHoursDTO();
         dto.setIdWorkHours(workHours.getIdWorkHours());
         dto.setStartWork(workHours.getStartWork());

@@ -44,7 +44,7 @@ public class Bill {
     private Double sodexoPaymentAmount;
 
     private Bill(Long idBill, LocalDateTime orderDate, LocalDateTime pickUpDate, Employee employee, Long texID,
-                 Double cashPaymentAmount, Double cardPaymentAmount, Double payUPaymentAmount, Double sodexoPaymentAmount){
+                 Double cashPaymentAmount, Double cardPaymentAmount, Double payUPaymentAmount, Double sodexoPaymentAmount) {
         this.idBill = idBill;
         this.orderDate = orderDate;
         this.pickUpDate = pickUpDate;
@@ -56,9 +56,10 @@ public class Bill {
         this.sodexoPaymentAmount = sodexoPaymentAmount;
     }
 
-    public Bill() {}
+    public Bill() {
+    }
 
-    public static Bill of(BillDTO dto){
+    public static Bill of(BillDTO dto) {
         return new Bill(dto.getIdBill(), dto.getOrderDate(), dto.getPickUpDate(), Employee.of(dto.getEmployeeDTO()),
                 dto.getTexID(), dto.getCashPaymentAmount(), dto.getCardPaymentAmount(), dto.getPayUPaymentAmount(),
                 dto.getSodexoPaymentAmount());
