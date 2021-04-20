@@ -34,7 +34,6 @@ public class OrderItemService {
     }
 
     public void saveAll(List<OrderItemDTO> orderItemsDTO) {
-        System.out.println(orderItemsDTO.toString());
         List<OrderItem> orderItemList = new ArrayList<>();
         billService.save(orderItemsDTO.get(0).getBillDTO());
         List<Bill> bills = billRepository.findAll();

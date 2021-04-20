@@ -38,44 +38,46 @@ public class BillService {
         return billDTO;
     }
 
-    private List<CheckDTO> findAllWithDateTimeAfter(LocalDateTime localDateTime) {
-        return CheckDTO.of(billRepository.findAllWithDateTimeAfter(localDateTime));
+    private List<BillDTO> findAllWithDateTimeAfter(LocalDateTime localDateTime) {
+        return BillDTO.of(billRepository.findAllWithDateTimeAfter(localDateTime));
     }
 
     public List<AverageBillAmountDTO> createAGCRaport() {
         LocalDate now = LocalDate.now();
         LocalDateTime localDateTime = LocalDateTime.of(now.getYear(), now.getMonth().getValue(), now.getDayOfMonth(), 0, 0);
 
-        List<CheckDTO> allWithDateTimeAfter = findAllWithDateTimeAfter(localDateTime);
-        List<AverageBillAmountDTO> averageBillAmountDTOS = new ArrayList<>();
-        boolean employeeFound = false;
+        List<BillDTO> allWithDateTimeAfter = findAllWithDateTimeAfter(localDateTime);
+        List<AverageBillAmountDTO> averageBillAmountDTOList = new ArrayList<>();
 
-        for (CheckDTO check : allWithDateTimeAfter) {
-            EmployeeDTO employee = check.getEmployeeDTO();
-            double amount = 0;
+        for (BillDTO bill : allWithDateTimeAfter) {
+            EmployeeDTO employee = bill.getEmployeeDTO();
+            double billAmount = bill.getCardPaymentAmount() + bill.getCashPaymentAmount()
+                    + bill.getSodexoPaymentAmount() + bill.getPayUPaymentAmount();
 
-            for (OrderItemDTO orderItem : check.getOrderItemDTOList()) {
-                amount = amount + (orderItem.getAmount() * orderItem.getMenuItemDTO().getPrice() - orderItem.getDiscount());
-            }
-
-            if (averageBillAmountDTOS.size() == 0) {
-                averageBillAmountDTOS.add(new AverageBillAmountDTO(employee, amount));
+            if (averageBillAmountDTOList.size() == 0 || !isEmployee(averageBillAmountDTOList, employee)) {
+                averageBillAmountDTOList.add(new AverageBillAmountDTO(bill.getEmployeeDTO(), billAmount));
             } else {
-                for (AverageBillAmountDTO averageBillAmountDTO : averageBillAmountDTOS) {
-                    if (averageBillAmountDTO.getEmployeeDTO().getIdEmployee().equals(employee.getIdEmployee())) {
-                        averageBillAmountDTO.setNumberOfTransactions(averageBillAmountDTO.getNumberOfTransactions() + 1);
-                        averageBillAmountDTO.setAmount(averageBillAmountDTO.getAmount() + amount);
-                        employeeFound = true;
+                for (AverageBillAmountDTO averageBillAmountDTO : averageBillAmountDTOList){
+                    if (averageBillAmountDTO.getEmployeeDTO().getIdEmployee().equals(employee.getIdEmployee())){
+                        double totalCashierRevenue = averageBillAmountDTO.getAmount();
+                        Integer numberOfTransactions = averageBillAmountDTO.getNumberOfTransactions();
+                        averageBillAmountDTO.setAmount(totalCashierRevenue + billAmount);
+                        averageBillAmountDTO.setNumberOfTransactions(numberOfTransactions + 1);
                         break;
                     }
                 }
-                if (!employeeFound) {
-                    averageBillAmountDTOS.add(new AverageBillAmountDTO(employee, amount));
-                }
-                employeeFound = false;
             }
         }
-        return averageBillAmountDTOS;
+        return averageBillAmountDTOList;
+    }
+
+    private boolean isEmployee(List<AverageBillAmountDTO> averageBillAmountDTOList, EmployeeDTO employeeDTO){
+        for (AverageBillAmountDTO averageBillAmountDTO : averageBillAmountDTOList){
+            if (averageBillAmountDTO.getEmployeeDTO().getIdEmployee().equals(employeeDTO.getIdEmployee())){
+                return true;
+            }
+        }
+        return false;
     }
 
 }

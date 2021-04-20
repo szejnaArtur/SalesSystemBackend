@@ -7,7 +7,7 @@ public class AverageBillAmountDTO {
 
     private EmployeeDTO employeeDTO;
     private Integer numberOfTransactions;
-    private Double amount;
+    private double amount;
 
     public AverageBillAmountDTO(EmployeeDTO employeeDTO, Double amount) {
         this.employeeDTO = employeeDTO;
