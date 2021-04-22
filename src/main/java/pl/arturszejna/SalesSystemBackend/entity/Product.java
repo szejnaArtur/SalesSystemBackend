@@ -3,6 +3,7 @@ package pl.arturszejna.SalesSystemBackend.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -15,12 +16,16 @@ public class Product {
     @Column
     private String name;
 
-    @Column
-    private Double quantity;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "idUnit")
+    private Unit unit;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "idQuantityType")
-    private QuantityType quantityType;
+    @JoinColumn(name = "idCategory")
+    private Category category;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
+    private List<Recipe> recipes;
 
 
 }

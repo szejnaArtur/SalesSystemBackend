@@ -3,10 +3,7 @@ package pl.arturszejna.SalesSystemBackend.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import pl.arturszejna.SalesSystemBackend.entity.QuantityType;
+import pl.arturszejna.SalesSystemBackend.entity.Unit;
 import pl.arturszejna.SalesSystemBackend.repository.QuantityTypeRepository;
 
 import java.util.List;
@@ -17,11 +14,11 @@ public class QuantityTypeService {
 
     private final QuantityTypeRepository quantityTypeRepository;
 
-    public QuantityType add(QuantityType quantityType) {
-        return quantityTypeRepository.save(quantityType);
+    public Unit add(Unit unit) {
+        return quantityTypeRepository.save(unit);
     }
 
-    public List<QuantityType> findAll() {
+    public List<Unit> findAll() {
         return quantityTypeRepository.findAll();
     }
 

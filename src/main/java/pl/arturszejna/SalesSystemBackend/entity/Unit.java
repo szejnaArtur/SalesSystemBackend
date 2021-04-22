@@ -7,16 +7,16 @@ import java.util.List;
 
 @Entity
 @Data
-public class QuantityType {
+public class Unit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idQuantityType;
+    private Long idUnit;
 
     @Column
     private String name;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "quantityType")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "unit")
     private List<Product> products;
 
 }

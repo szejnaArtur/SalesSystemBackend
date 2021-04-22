@@ -40,7 +40,10 @@ public class MenuItem {
             joinColumns = {@JoinColumn(name = "idMenuItem")},
             inverseJoinColumns = {@JoinColumn(name = "idAddon")}
     )
-    List<Addon> addons;
+    private List<Addon> addons;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "menuItem")
+    private List<Recipe> recipes;
 
     private MenuItem(Long idMenuItem, String name, Double price, Integer kcal, String description, MenuItemType type, List<Addon> addons) {
         this.idMenuItem = idMenuItem;
