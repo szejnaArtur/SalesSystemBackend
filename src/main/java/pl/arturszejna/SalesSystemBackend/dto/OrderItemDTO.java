@@ -1,7 +1,6 @@
 package pl.arturszejna.SalesSystemBackend.dto;
 
 import lombok.Data;
-import pl.arturszejna.SalesSystemBackend.entity.OrderAddon;
 import pl.arturszejna.SalesSystemBackend.entity.OrderItem;
 
 import java.util.ArrayList;

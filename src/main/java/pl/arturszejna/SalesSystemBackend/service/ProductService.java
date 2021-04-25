@@ -1,9 +1,8 @@
 package pl.arturszejna.SalesSystemBackend.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import pl.arturszejna.SalesSystemBackend.entity.Product;
+import pl.arturszejna.SalesSystemBackend.dto.ProductDTO;
 import pl.arturszejna.SalesSystemBackend.repository.ProductRepository;
 
 import java.util.List;
@@ -14,17 +13,16 @@ public class ProductService {
 
     private final ProductRepository productRepository;
 
-    public Product add(Product newProduct) {
-        return productRepository.save(newProduct);
+    public List<ProductDTO> findAll() {
+        return ProductDTO.of(productRepository.findAll());
     }
 
-    public List<Product> findAll() {
-        return productRepository.findAll();
+    public List<ProductDTO> findAllByCategory_Id(Long id) {
+        return ProductDTO.of(productRepository.findAllByCategory_IdCategory(id));
     }
 
-    public ResponseEntity delete(Long idItem) {
-        productRepository.deleteById(idItem);
-        return ResponseEntity.ok().build();
+    public List<ProductDTO> findAllByCategory_Name(String name) {
+        return ProductDTO.of(productRepository.findAllByCategory_Name(name));
     }
 
 }
