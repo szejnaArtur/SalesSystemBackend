@@ -5,13 +5,13 @@ import org.springframework.stereotype.Service;
 import pl.arturszejna.SalesSystemBackend.dto.*;
 import pl.arturszejna.SalesSystemBackend.entity.Bill;
 import pl.arturszejna.SalesSystemBackend.entity.Employee;
+import pl.arturszejna.SalesSystemBackend.entity.OrderItem;
+import pl.arturszejna.SalesSystemBackend.entity.Recipe;
 import pl.arturszejna.SalesSystemBackend.repository.BillRepository;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -57,8 +57,8 @@ public class BillService {
             if (averageBillAmountDTOList.size() == 0 || !isEmployee(averageBillAmountDTOList, employee)) {
                 averageBillAmountDTOList.add(new AverageBillAmountDTO(bill.getEmployeeDTO(), billAmount));
             } else {
-                for (AverageBillAmountDTO averageBillAmountDTO : averageBillAmountDTOList){
-                    if (averageBillAmountDTO.getEmployeeDTO().getIdEmployee().equals(employee.getIdEmployee())){
+                for (AverageBillAmountDTO averageBillAmountDTO : averageBillAmountDTOList) {
+                    if (averageBillAmountDTO.getEmployeeDTO().getIdEmployee().equals(employee.getIdEmployee())) {
                         double totalCashierRevenue = averageBillAmountDTO.getAmount();
                         Integer numberOfTransactions = averageBillAmountDTO.getNumberOfTransactions();
                         averageBillAmountDTO.setAmount(totalCashierRevenue + billAmount);
@@ -71,13 +71,38 @@ public class BillService {
         return averageBillAmountDTOList;
     }
 
-    private boolean isEmployee(List<AverageBillAmountDTO> averageBillAmountDTOList, EmployeeDTO employeeDTO){
-        for (AverageBillAmountDTO averageBillAmountDTO : averageBillAmountDTOList){
-            if (averageBillAmountDTO.getEmployeeDTO().getIdEmployee().equals(employeeDTO.getIdEmployee())){
+    private boolean isEmployee(List<AverageBillAmountDTO> averageBillAmountDTOList, EmployeeDTO employeeDTO) {
+        for (AverageBillAmountDTO averageBillAmountDTO : averageBillAmountDTOList) {
+            if (averageBillAmountDTO.getEmployeeDTO().getIdEmployee().equals(employeeDTO.getIdEmployee())) {
                 return true;
             }
         }
         return false;
     }
 
+    public Map<String, Double> perfectConsumptionOfTheProduct() {
+        LocalDate now = LocalDate.now();
+        LocalDateTime localDateTime = LocalDateTime.of(now.getYear(), now.getMonth().getValue(), now.getDayOfMonth(), 0, 0);
+
+        List<Bill> allWithDateTimeAfter = billRepository.findAllWithDateTimeAfter(localDateTime);
+
+        Map<String, Double> perfectProductConsumption = new HashMap<>();
+        for (Bill bill : allWithDateTimeAfter) {
+            for (OrderItem orderItem : bill.getOrderItems()) {
+                for (Recipe recipe : orderItem.getMenuItem().getRecipes()) {
+                    if (perfectProductConsumption.isEmpty()){
+                        perfectProductConsumption.put(recipe.getProduct().getName(), recipe.getQuantity());
+                    } else {
+                        if (!perfectProductConsumption.containsKey(recipe.getProduct().getName())){
+                            perfectProductConsumption.put(recipe.getProduct().getName(), recipe.getQuantity());
+                        } else {
+                            Double amount = perfectProductConsumption.get(recipe.getProduct().getName());
+                            perfectProductConsumption.put(recipe.getProduct().getName(), amount + recipe.getQuantity());
+                        }
+                    }
+                }
+            }
+        }
+        return perfectProductConsumption;
+    }
 }

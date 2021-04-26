@@ -11,22 +11,24 @@ public class RecipeDTO {
 
     private Long idRecipe;
     private Double quantity;
-    //    private MenuItem menuItem;
+    private MenuItemDTO_GET menuItem;
     private ProductDTO product;
 
-    private RecipeDTO(Long idRecipe, Double quantity, ProductDTO product){
+    private RecipeDTO(Long idRecipe, Double quantity, ProductDTO product, MenuItemDTO_GET menuItem) {
         setIdRecipe(idRecipe);
         setQuantity(quantity);
         setProduct(product);
+        setMenuItem(menuItem);
     }
 
-    public static RecipeDTO of(Recipe recipe){
-        return new RecipeDTO(recipe.getIdRecipe(), recipe.getQuantity(), ProductDTO.of(recipe.getProduct()));
+    public static RecipeDTO of(Recipe recipe) {
+        return new RecipeDTO(recipe.getIdRecipe(), recipe.getQuantity(), ProductDTO.of(recipe.getProduct()),
+                MenuItemDTO_GET.of(recipe.getMenuItem()));
     }
 
-    public static List<RecipeDTO> of(List<Recipe> recipeList){
+    public static List<RecipeDTO> of(List<Recipe> recipeList) {
         List<RecipeDTO> recipeDTOList = new ArrayList<>();
-        for (Recipe recipe : recipeList){
+        for (Recipe recipe : recipeList) {
             recipeDTOList.add(RecipeDTO.of(recipe));
         }
         return recipeDTOList;

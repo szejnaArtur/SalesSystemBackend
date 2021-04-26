@@ -7,6 +7,7 @@ import pl.arturszejna.SalesSystemBackend.dto.BillDTO;
 import pl.arturszejna.SalesSystemBackend.service.BillService;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -33,6 +34,11 @@ public class BillController {
     @GetMapping("/AGC")
     public List<AverageBillAmountDTO> showAGCRaport() {
         return billService.createAGCRaport();
+    }
+
+    @GetMapping("/perfectConsumption")
+    public Map<String, Double> perfectConsumption() {
+        return billService.perfectConsumptionOfTheProduct();
     }
 
 }
