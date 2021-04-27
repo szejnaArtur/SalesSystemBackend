@@ -1,6 +1,7 @@
 package pl.arturszejna.SalesSystemBackend.entity;
 
 import lombok.Data;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 
