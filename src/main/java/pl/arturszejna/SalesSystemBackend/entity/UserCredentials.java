@@ -25,6 +25,9 @@ public class UserCredentials implements UserDetails {
     @JoinColumn(name = "idUser")
     private User user;
 
+    public UserCredentials(){
+
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
