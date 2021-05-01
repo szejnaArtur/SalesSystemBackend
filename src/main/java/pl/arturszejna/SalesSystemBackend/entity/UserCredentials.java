@@ -25,7 +25,14 @@ public class UserCredentials implements UserDetails {
     @JoinColumn(name = "idUser")
     private User user;
 
-    public UserCredentials(){
+    public UserCredentials(String login, String password, User user){
+        super();
+        this.login = login;
+        this.password = password;
+        this.user = user;
+    }
+
+    public UserCredentials() {
 
     }
 
@@ -36,27 +43,32 @@ public class UserCredentials implements UserDetails {
     }
 
     @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
     public String getUsername() {
-        return null;
+        return login;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }
