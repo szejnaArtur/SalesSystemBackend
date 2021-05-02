@@ -32,6 +32,12 @@ public class UserCredentials implements UserDetails {
         this.user = user;
     }
 
+    public UserCredentials(String login, String password){
+        super();
+        this.login = login;
+        this.password = password;
+    }
+
     public UserCredentials() {
 
     }

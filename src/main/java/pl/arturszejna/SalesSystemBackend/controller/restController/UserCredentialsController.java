@@ -18,8 +18,9 @@ public class UserCredentialsController {
     private final UserCredentialsService userCredentialsService;
 
     @PostMapping("/add")
-    public UserCredentials add(@RequestBody UserCredentials userCredentials) {
-        return userCredentialsService.add(userCredentials);
+    public UserCredentials add() {
+        UserCredentials userCredentials = new UserCredentials("anna", "buczkowicz");
+        return userCredentialsService.signUpUserCredensials(userCredentials);
     }
 
     @GetMapping("/findAll")

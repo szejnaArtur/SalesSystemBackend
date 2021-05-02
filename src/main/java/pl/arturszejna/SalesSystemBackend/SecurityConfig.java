@@ -1,24 +1,26 @@
 package pl.arturszejna.SalesSystemBackend;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import pl.arturszejna.SalesSystemBackend.component.CustomDaoAuthenticationProvider;
 import pl.arturszejna.SalesSystemBackend.service.JpaUserDetailsService;
 
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    private CustomDaoAuthenticationProvider authenticationProvider;
     private final JpaUserDetailsService userDetailsService;
-    private final CustomDaoAuthenticationProvider authenticationProvider;
 
     @Autowired
-    public SecurityConfig(JpaUserDetailsService userDetailsService,
-                          CustomDaoAuthenticationProvider authenticationProvider){
+    public SecurityConfig(JpaUserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
-        this.authenticationProvider =authenticationProvider;
     }
 
     @Override
@@ -34,6 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login").permitAll()
                 .antMatchers("/css/**").permitAll()
                 .antMatchers("/admin_panel").hasAuthority("ADMIN")
+//                .anyRequest().permitAll()
                 .anyRequest().authenticated()
                 .and()
 
@@ -45,7 +48,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .logoutUrl("/user_logout")
                 .logoutSuccessUrl("/login?logout")
-                .deleteCookies("cookies");
+                .deleteCookies("cookies")
+//                .and()
+        ;
+//                .csrf().disable();
+    }
 
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 }
