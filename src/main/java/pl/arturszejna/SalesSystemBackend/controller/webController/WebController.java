@@ -18,10 +18,4 @@ public class WebController {
         modelAndView.setViewName("login");
         return modelAndView;
     }
-
-    @GetMapping("/admin_panel")
-    public ModelAndView adminPanel(ModelAndView modelAndView) {
-        modelAndView.setViewName("admin_panel");
-        return modelAndView;
-    }
 }
