@@ -3,7 +3,6 @@ package pl.arturszejna.SalesSystemBackend.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import pl.arturszejna.SalesSystemBackend.entity.Bill;
 import pl.arturszejna.SalesSystemBackend.entity.OrderItem;
 
 import java.time.LocalDateTime;
