@@ -5,9 +5,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import pl.arturszejna.SalesSystemBackend.component.mailer.RandomStringFactory;
+import pl.arturszejna.SalesSystemBackend.component.mailer.SignUpMailer;
 import pl.arturszejna.SalesSystemBackend.dto.UserAuthenticationResultDTO;
 import pl.arturszejna.SalesSystemBackend.dto.UserCredentialsDTO;
+import pl.arturszejna.SalesSystemBackend.entity.Role;
 import pl.arturszejna.SalesSystemBackend.entity.UserCredentials;
+import pl.arturszejna.SalesSystemBackend.repository.RoleRepository;
 import pl.arturszejna.SalesSystemBackend.repository.UserCredentialsRepository;
 
 import java.util.List;
@@ -15,10 +19,13 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class UserCredentialsService{
+public class UserCredentialsService {
 
+    private static final int TOKEN_LENGTH = 20;
     private final UserCredentialsRepository userCredentialsRepository;
     private final PasswordEncoder passwordEncoder;
+    private final SignUpMailer mailer;
+    private final RoleRepository roleRepository;
 
     public UserCredentials add(UserCredentials userCredentials) {
         return userCredentialsRepository.save(userCredentials);
@@ -50,11 +57,20 @@ public class UserCredentialsService{
         }
     }
 
-    public UserCredentials signUpUserCredensials(UserCredentials userCredentials){
+    public UserCredentials signUpUserCredensials(UserCredentials userCredentials) {
         Assert.isNull(userCredentials.getIdUserCredentials(), "Can't sign up given user, it already has set id. User: "
-                + userCredentials);
-        userCredentials.setPassword(passwordEncoder.encode(userCredentials.getPassword()));
-        return userCredentialsRepository.save(userCredentials);
+                + userCredentials.getUsername());
+        Optional<UserCredentials> optionalUser = userCredentialsRepository.findByLogin(userCredentials.getLogin());
+        if (!optionalUser.isPresent()) {
+            userCredentials.setPassword(passwordEncoder.encode(userCredentials.getPassword()));
+            String token = RandomStringFactory.getRandomString(TOKEN_LENGTH);
+            userCredentials.setConfirmationToken(token);
+            Optional<Role> roleOptional = roleRepository.findByName("JUNIOR_MANAGER");
+            roleOptional.ifPresent(role -> userCredentials.getRoles().add(role));
+            mailer.sendConfirmationLink(userCredentials.getUser().getEmail(), token);
+            userCredentialsRepository.save(userCredentials);
+        }
+        return userCredentials;
     }
 
 }

@@ -9,4 +9,5 @@ public interface UserCredentialsRepository extends JpaRepository<UserCredentials
 
     Optional<UserCredentials> findByLogin(String login);
 
+    Optional<UserCredentials> findByConfirmationToken(String token);
 }

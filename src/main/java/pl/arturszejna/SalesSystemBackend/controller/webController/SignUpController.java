@@ -4,32 +4,53 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import pl.arturszejna.SalesSystemBackend.entity.UserCredentials;
+import pl.arturszejna.SalesSystemBackend.repository.UserCredentialsRepository;
 import pl.arturszejna.SalesSystemBackend.service.UserCredentialsService;
+
+import java.util.Optional;
 
 @Controller
 public class SignUpController {
 
-    private UserCredentialsService userCredentialsService;
+    private final UserCredentialsService userCredentialsService;
+    private final UserCredentialsRepository userCredentialsRepository;
 
     @Autowired
-    public SignUpController(UserCredentialsService userCredentialsService){
+    public SignUpController(UserCredentialsService userCredentialsService, UserCredentialsRepository userCredentialsRepository) {
         this.userCredentialsService = userCredentialsService;
+        this.userCredentialsRepository = userCredentialsRepository;
     }
 
     @GetMapping("/sign_up")
-    public ModelAndView signUp(ModelAndView modelAndView){
+    public ModelAndView signUp(ModelAndView modelAndView) {
         modelAndView.setViewName("sign_up");
         return modelAndView;
     }
 
     @PostMapping("/sign_up")
-    public ModelAndView signUpPost(ModelAndView modelAndView, @RequestParam("username") String username, @RequestParam("password") String password){
-        modelAndView.setViewName("redirect:/login");
-        userCredentialsService.signUpUserCredensials(new UserCredentials(username, password));
+    public ModelAndView signUpPost(ModelAndView modelAndView, @RequestParam("username") String username,
+                                   @RequestParam("password") String password, @RequestParam("email") String email,
+                                   @RequestParam("first_name") String firstName, @RequestParam("last_name") String lastName) {
+        modelAndView.setViewName("info");
+        userCredentialsService.signUpUserCredensials(UserCredentials.of(firstName, lastName, email, username, password));
         return modelAndView;
+    }
+
+    @RequestMapping("confirm_email")
+    public String confirmEmail(@RequestParam(name = "token") String token) {
+        Optional<UserCredentials> optionalUser = userCredentialsRepository.findByConfirmationToken(token);
+        if (optionalUser.isPresent()) {
+            UserCredentials user = optionalUser.get();
+            user.setEnabled(true);
+            userCredentialsRepository.save(user);
+            return "redirect:/login";
+        } else {
+            return "error";
+        }
     }
 
 }

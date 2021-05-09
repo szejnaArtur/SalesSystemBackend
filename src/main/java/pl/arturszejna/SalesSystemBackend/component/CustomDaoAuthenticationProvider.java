@@ -36,7 +36,7 @@ public class CustomDaoAuthenticationProvider implements AuthenticationProvider {
         Assert.notNull(name, USERNAME_CANNOT_BE_NULL);
         Assert.notNull(credentials, CREDENSIALS_CANNOT_BE_NULL);
 
-        if (!(credentials instanceof String)){
+        if (credentials instanceof String){
             return null;
         }
 

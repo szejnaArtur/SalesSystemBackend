@@ -1,7 +1,6 @@
 package pl.arturszejna.SalesSystemBackend.entity;
 
 import lombok.Data;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 
@@ -19,7 +18,18 @@ public class User {
     @Column
     private String lastName;
 
+    @Column
+    private String email;
+
     @OneToOne(mappedBy = "user")
     private UserCredentials userCredentials;
+
+    public User(String firstName, String lastName, String email){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+    }
+
+    public User(){}
 
 }

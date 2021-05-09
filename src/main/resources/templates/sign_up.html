@@ -10,6 +10,12 @@
 
 <form class="login-form" action="/sign_up" method="post">
     <h1 class="login-element">Sign Up a Manager</h1>
+    <div class="login-element">First Name:</div>
+    <input class="login-element" type="text" name="first_name" value="">
+    <div class="login-element">Last name:</div>
+    <input class="login-element" type="text" name="last_name" value="">
+    <div class="login-element">E-mail:</div>
+    <input class="login-element" type="email" name="email" value="">
     <div class="login-element">Username:</div>
     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
     <input class="login-element" type="text" name="username" value="">
