@@ -26,6 +26,12 @@ public class WebController {
         return modelAndView;
     }
 
+    @GetMapping("/test")
+    public ModelAndView testPanel(ModelAndView modelAndView) {
+        modelAndView.setViewName("test");
+        return modelAndView;
+    }
+
     @GetMapping("/login")
     public ModelAndView loginPanel(ModelAndView modelAndView) {
         modelAndView.setViewName("login");
