@@ -1,0 +1,123 @@
+<nav class="sidebar" xmlns:sec="http://www.w3.org/1999/xhtml">
+    <div class="text">Side Menu</div>
+    <ul>
+        <li><a href="/user_panel">Dashborad</a></li>
+        <li>
+            <a href="#" class="reports-btn">Reports
+                <span class="fas fa-caret-down fisrt"></span>
+            </a>
+            <ul class="reports-show">
+                <li><a href="#">Daily KPI's</a></li>
+                <li><a href="#">Todays Operations</a></li>
+                <li><a href="#">Daily Operations</a></li>
+                <li><a href="#">Cost of Sales</a></li>
+                <li><a href="#">Sales Mix</a></li>
+                <li><a href="#">Sales Mix</a></li>
+                <li><a href="#">Order/Pickup</a></li>
+                <li><a href="#">Free items report</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#" class="employee-btn">Employee results
+                <span class="fas fa-caret-down second"></span>
+            </a>
+            <ul class="employee-show">
+                <li><a href="#">Upsell Tdy</a></li>
+                <li><a href="#">Upsell</a></li>
+                <li><a href="#">Day Part Channel Mix</a></li>
+                <li><a href="#">Cashier Trans</a></li>
+                <li><a href="#">Today Cashier</a></li>
+                <li><a href="#">Daily Cashier</a></li>
+                <li><a href="#">Promo Store Tdy</a></li>
+                <li><a href="#">Promo Store Dly</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#" class="product-btn">Product
+                <span class="fas fa-caret-down third"></span>
+            </a>
+            <ul class="product-show">
+                <li><a href="#">MyInventory</a></li>
+                <li><a href="#">PCA VAriance</a></li>
+                <li><a href="#">Manage Store</a></li>
+                <li><a href="#">Max Stock</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#" class="people-btn">People
+                <span class="fas fa-caret-down fourth"></span>
+            </a>
+            <ul class="people-show">
+                <li><a href="#">Employee Control</a></li>
+                <li><a href="#">HR Emp Master</a></li>
+                <li><a href="#">Human Resource</a></li>
+                <li sec:authorize="hasAuthority('GENERAL_MANAGER')"><a href="/sign_up">Employees</a></li>
+                <li><a href="#">TimeCard Summary</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#" class="bank-btn">Bank deposit
+                <span class="fas fa-caret-down fifth"></span>
+            </a>
+            <ul class="bank-show">
+                <li><a href="#">Bank Deposit - PL</a></li>
+                <li><a href="#">Bankowy dowód wpłaty</a></li>
+                <li><a href="#">Bankowy dowód wpłaty - EU</a></li>
+                <li><a href="#">Empty BDW</a></li>
+                <li><a href="#">SA Report</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#" class="delivery-btn">Delivery
+                <span class="fas fa-caret-down sixth"></span>
+            </a>
+            <ul class="delivery-show">
+                <li><a href="#">Speed Dash</a></li>
+                <li><a href="#">Delivery under 30</a></li>
+                <li><a href="#">Sales By Date Part</a></li>
+            </ul>
+        </li>
+        <li>
+            <form action="/user_logout" method="post">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                <a onclick='this.parentNode.submit()'>Logout</a>
+            </form>
+        </li>
+    </ul>
+</nav>
+
+<script>
+    $('.reports-btn').click(function () {
+        $('nav ul .reports-show').toggleClass("show");
+        $('nav ul .fisrt').toggleClass("rotate");
+    });
+
+    $('.employee-btn').click(function () {
+        $('nav ul .employee-show').toggleClass("show");
+        $('nav ul .second').toggleClass("rotate");
+    });
+
+    $('.product-btn').click(function () {
+        $('nav ul .product-show').toggleClass("show");
+        $('nav ul .third').toggleClass("rotate");
+    });
+
+    $('.people-btn').click(function () {
+        $('nav ul .people-show').toggleClass("show");
+        $('nav ul .fourth').toggleClass("rotate");
+    });
+
+    $('.bank-btn').click(function () {
+        $('nav ul .bank-show').toggleClass("show");
+        $('nav ul .fifth').toggleClass("rotate");
+    });
+
+    $('.delivery-btn').click(function () {
+        $('nav ul .delivery-show').toggleClass("show");
+        $('nav ul .sixth').toggleClass("rotate");
+    });
+
+    $('nav ul li').click(function () {
+        $(this).addClass("active").siblings().removeClass("active");
+    });
+</script>
