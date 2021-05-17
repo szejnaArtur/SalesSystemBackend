@@ -27,7 +27,7 @@ public class WebController {
 
     @GetMapping("/login")
     public ModelAndView loginPanel(ModelAndView modelAndView) {
-        modelAndView.setViewName("loginNew");
+        modelAndView.setViewName("login");
         return modelAndView;
     }
 }

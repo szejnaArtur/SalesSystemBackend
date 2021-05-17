@@ -1,37 +1,97 @@
 <!DOCTYPE HTML>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Sign Up a Manager</title>
+    <title>Registration Form</title>
 
     <link rel="stylesheet" type="text/css" href="css/menu.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    <link rel="stylesheet" type="text/css" href="css/login.css">
+    <link rel="stylesheet" type="text/css" href="css/registration.css">
+
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
 
 
 </head>
 <body>
 <div class="main">
     <div th:insert="menu.html :: div"></div>
-
-    <div class="content">
-        <form class="login-form" action="/sign_up" method="post">
-            <h1 class="login-element">Sign Up a Manager</h1>
-            <div class="login-element">First Name:</div>
-            <input class="login-element" type="text" name="first_name" value="">
-            <div class="login-element">Last name:</div>
-            <input class="login-element" type="text" name="last_name" value="">
-            <div class="login-element">E-mail:</div>
-            <input class="login-element" type="email" name="email" value="">
-            <div class="login-element">Username:</div>
-            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-            <input class="login-element" type="text" name="username" value="">
-            <div class="login-element">Password:</div>
-            <input class="login-element" type="password" name="password" value="">
-            <input class="login-element" type="submit" name="submit" value="Sign up">
-        </form>
+        <div class="box">
+            <div class="title">Registration</div>
+            <div class="box-content">
+                <form action="#">
+                    <div class="user-details">
+                        <div class="input-box">
+                            <span class="details">Full Name</span>
+                            <input type="text" placeholder="Enter your name" required>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Username</span>
+                            <input type="text" placeholder="Enter your username" required>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Email</span>
+                            <input type="text" placeholder="Enter your email" required>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Phone Number</span>
+                            <input type="text" placeholder="Enter your number" required>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Password</span>
+                            <input type="text" placeholder="Enter your password" required>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Confirm Password</span>
+                            <input type="text" placeholder="Confirm your password" required>
+                        </div>
+                    </div>
+                    <div class="gender-details">
+                        <input type="radio" name="gender" id="dot-1">
+                        <input type="radio" name="gender" id="dot-2">
+                        <input type="radio" name="gender" id="dot-3">
+                        <span class="gender-title">Gender</span>
+                        <div class="category">
+                            <label for="dot-1">
+                                <span class="dot one"></span>
+                                <span class="gender">Male</span>
+                            </label>
+                            <label for="dot-2">
+                                <span class="dot two"></span>
+                                <span class="gender">Female</span>
+                            </label>
+                            <label for="dot-3">
+                                <span class="dot three"></span>
+                                <span class="gender">Prefer not to say</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="button">
+                        <input type="submit" value="Register">
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-</div>
+
+<!--    <div class="content">-->
+<!--        <form class="login-form" action="/sign_up" method="post">-->
+<!--            <h1 class="login-element">Sign Up a Manager</h1>-->
+<!--            <div class="login-element">First Name:</div>-->
+<!--            <input class="login-element" type="text" name="first_name" value="">-->
+<!--            <div class="login-element">Last name:</div>-->
+<!--            <input class="login-element" type="text" name="last_name" value="">-->
+<!--            <div class="login-element">E-mail:</div>-->
+<!--            <input class="login-element" type="email" name="email" value="">-->
+<!--            <div class="login-element">Username:</div>-->
+<!--            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">-->
+<!--            <input class="login-element" type="text" name="username" value="">-->
+<!--            <div class="login-element">Password:</div>-->
+<!--            <input class="login-element" type="password" name="password" value="">-->
+<!--            <input class="login-element" type="submit" name="submit" value="Sign up">-->
+<!--        </form>-->
+<!--    </div>-->
 </body>
 </html>
