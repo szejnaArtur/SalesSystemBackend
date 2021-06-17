@@ -31,6 +31,7 @@
     height: 100%;
     left: -250px;
     background: #1b1b1b;
+    z-index: 999;
     transition: left 0.4s ease;
 }
 

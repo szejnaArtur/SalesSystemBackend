@@ -21,13 +21,17 @@ public class User {
     @Column
     private String email;
 
+    @Column
+    private Integer phone;
+
     @OneToOne(mappedBy = "user")
     private UserCredentials userCredentials;
 
-    public User(String firstName, String lastName, String email){
+    public User(String firstName, String lastName, String email, Integer phone){
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.phone = phone;
     }
 
     public User(){}

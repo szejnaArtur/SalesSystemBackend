@@ -32,11 +32,20 @@ public class SignUpController {
     }
 
     @PostMapping("/sign_up")
-    public ModelAndView signUpPost(ModelAndView modelAndView, @RequestParam("username") String username,
-                                   @RequestParam("password") String password, @RequestParam("email") String email,
-                                   @RequestParam("first_name") String firstName, @RequestParam("last_name") String lastName) {
-        modelAndView.setViewName("info");
-        userCredentialsService.signUpUserCredensials(UserCredentials.of(firstName, lastName, email, username, password));
+    public ModelAndView signUpPost(ModelAndView modelAndView,
+                                   @RequestParam("username") String username,
+                                   @RequestParam("password") String password,
+                                   @RequestParam("phone") Integer phone,
+//                                   @RequestParam("email") String email,
+                                   @RequestParam("full_name") String fullName) {
+
+        String[] name = fullName.split(" ");
+        if (name.length == 2){
+            userCredentialsService.signUpUserCredensials(UserCredentials.of(name[0], name[1], "arturtest69@gmail.com", username, password, phone));
+            modelAndView.setViewName("info");
+        } else {
+            modelAndView.setViewName("error");
+        }
         return modelAndView;
     }
 

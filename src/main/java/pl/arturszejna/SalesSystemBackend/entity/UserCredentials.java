@@ -61,8 +61,8 @@ public class UserCredentials implements UserDetails {
         this.roles = new HashSet<>();
     }
 
-    public static UserCredentials of(String firstName, String lastName, String email, String username, String password) {
-        return new UserCredentials(username, password, new User(firstName, lastName, email));
+    public static UserCredentials of(String firstName, String lastName, String email, String username, String password, Integer phone) {
+        return new UserCredentials(username, password, new User(firstName, lastName, email, phone));
     }
 
     @Override
