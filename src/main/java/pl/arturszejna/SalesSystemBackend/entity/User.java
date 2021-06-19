@@ -27,13 +27,14 @@ public class User {
     @OneToOne(mappedBy = "user")
     private UserCredentials userCredentials;
 
-    public User(String firstName, String lastName, String email, Integer phone){
+    public User(String firstName, String lastName, String email, Integer phone) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phone = phone;
     }
 
-    public User(){}
+    public User() {
+    }
 
 }

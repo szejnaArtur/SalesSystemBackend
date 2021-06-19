@@ -40,7 +40,7 @@ public class SignUpController {
                                    @RequestParam("full_name") String fullName) {
 
         String[] name = fullName.split(" ");
-        if (name.length == 2){
+        if (name.length == 2) {
             userCredentialsService.signUpUserCredensials(UserCredentials.of(name[0], name[1], "arturtest69@gmail.com", username, password, phone));
             modelAndView.setViewName("info");
         } else {
