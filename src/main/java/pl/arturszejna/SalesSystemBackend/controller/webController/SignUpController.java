@@ -35,13 +35,14 @@ public class SignUpController {
     public ModelAndView signUpPost(ModelAndView modelAndView,
                                    @RequestParam("username") String username,
                                    @RequestParam("password") String password,
+//                                   @RequestParam("confirm") String confirm,
                                    @RequestParam("phone") Integer phone,
-//                                   @RequestParam("email") String email,
+                                   @RequestParam("email") String email,
                                    @RequestParam("full_name") String fullName) {
 
         String[] name = fullName.split(" ");
         if (name.length == 2) {
-            userCredentialsService.signUpUserCredensials(UserCredentials.of(name[0], name[1], "arturtest69@gmail.com", username, password, phone));
+            userCredentialsService.signUpUserCredensials(UserCredentials.of(name[0], name[1], email, username, password, phone));
             modelAndView.setViewName("info");
         } else {
             modelAndView.setViewName("error");
