@@ -17,7 +17,7 @@ public class SignUpMailer {
         this.textFactory = textFactory;
     }
 
-    public void sendConfirmationLink(String email, String token){
+    public void sendConfirmationLink(String email, String token) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(email);
         message.setSubject(textFactory.getConfirmationMailSubject());
@@ -25,7 +25,7 @@ public class SignUpMailer {
         emailSender.send(message);
     }
 
-    public void sendMessage(String to, String subject, String text){
+    public void sendMessage(String to, String subject, String text) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(to);
         message.setSubject(subject);
