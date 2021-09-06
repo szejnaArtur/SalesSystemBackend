@@ -45,4 +45,21 @@ public class EmployeeService {
         Optional<Employee> optionalEmployee = employeeRepository.findById(id);
         return optionalEmployee.orElse(null);
     }
+
+    public List<Employee> findAll(){
+        return employeeRepository.findAll();
+    }
+
+    public Employee save(Employee employee){
+        return employeeRepository.save(employee);
+    }
+
+    public String delete(Long id) {
+        Optional<Employee> optionalEmployee = employeeRepository.findById(id);
+        if (optionalEmployee.isPresent()){
+            employeeRepository.delete(optionalEmployee.get());
+            return "Employee has been deleted.";
+        }
+        return "There is no such employee.";
+    }
 }

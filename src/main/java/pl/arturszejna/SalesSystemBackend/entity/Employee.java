@@ -32,6 +32,12 @@ public class Employee {
     public Employee() {
     }
 
+    public Employee(String firstName, String lastName, String PIN) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.PIN = PIN;
+    }
+
     private Employee(Long idEmployee, String firstName, String lastName, String PIN) {
         this.idEmployee = idEmployee;
         this.firstName = firstName;
